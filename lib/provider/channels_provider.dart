@@ -139,7 +139,7 @@ class ChannelsProvider with ChangeNotifier {
   List<Channel> filterChannels(String query) {
     filteredChannels = channels
         .where((channel) =>
-            channel.name.toLowerCase().contains(query.toLowerCase()))
+            // channel.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
     return filteredChannels;
   }
@@ -224,5 +224,5 @@ class ChannelsProvider with ChangeNotifier {
     return filteredChannels;
   }
 } // <-- make sure this closing brace is here
-
+////////////////////////////////////////////////////////////////
 // this is the end  code  for fetchM3UFile new
