@@ -648,7 +648,7 @@ class _HomeState extends State<Home> {
               }),
             ),
             onPressed: () => fetchChannels(source),
-            child: Text(source.name, style: const TextStyle(fontSize: 16)),
+            child: Text(source.name, style: const TextStyle(fontSize: 18)),
           ),
         );
       },
