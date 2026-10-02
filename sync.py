@@ -85,9 +85,11 @@ OWNER, REPO = "sportlive18", "jio-tv-auto-update-playlist"
 MINE = "data/Entertainments.m3u"
 UA = {"User-Agent": "Mozilla/5.0"}
 
-def api(path):
-    req = urllib.request.Request("https://api.github.com/repos/%s/%s/%s" % (OWNER, REPO, path),
-                                 headers={"User-Agent": "sync", "Accept": "application/vnd.github+json"})
+# def api(path):
+    url = "https://api.github.com/repos/%s/%s" % (OWNER, REPO)
+    if path:
+        url += "/" + path
+    req = urllib.request.Request(url, headers={"User-Agent": "sync", "Accept": "application/vnd.github+json"})
     tok = os.environ.get("GITHUB_TOKEN")
     if tok:
         req.add_header("Authorization", "Bearer " + tok)
