@@ -28,7 +28,7 @@ https://sliv.tgaadi.workers.dev/sonypalsd.m3u8
 https://sliv.tgaadi.workers.dev/sonymaxsd.m3u8
 
 
-#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/a/a2/Zee_TV_Logo_2025.svg" group-title="Entertainment",Zee TV HD
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Zee_TV_Logo_2025.svg/960px-Zee_TV_Logo_2025.svg.png" group-title="Entertainment",Zee TV HD
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=65c3633157574361b191059e46e72968:78450b11381340c297d96c13183d3744
 https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeetvhd/default/index.mpd
@@ -53,6 +53,7 @@ https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeebollywood/default/manifest.mpd
 #KODIPROP:inputstream.adaptive.license_key=9d7a1917ee3244d198193cdd1ff1feae:3c3e8d0259f748f1830f713a769760e7
 https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeeaction/default/manifest.mpd
 
+
 #EXTINF:-1  tvg-logo="https://i.imgur.com/9Qq8DKh.png" group-title="Undefined",Sony Kal (1080p)
 https://wurlsonypicturestv.global.transmit.live/hls/68deeb1c0238cda82df543dd/v1/spt_sonykal_1/lg_us/latest/main/hls/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ABP_News_India.png",ABP News (1080p)
@@ -61,11 +62,15 @@ https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/abpnews-livetv/master.m3u8
 #EXTINF:-1 tvg-logo="https://www.sonypicturesnetworks.com/images/logos/SBBCE_LOGO_NEW_PNG.png" group-title="Sony | Sportlink",Sony BBC Earth HD
 https://sliv.tgaadi.workers.dev/sonybbcearthhd.m3u8
 
-#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCn2KAuMTDKTbK2uQI-jj48q4X9FlRG_OKg&s" group-title="Zee | Sportlink",Zee Cinema HD
-https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeecinemahd/default/manifest.mpd
 
 #EXTINF:-1 tvg-logo="https://www.sonypicturesnetworks.com/images/logos/Sony_WAH.png" group-title="Sony | Sportlink",Sony WAH
 https://sliv.tgaadi.workers.dev/sonywah.m3u8
+
+#EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCn2KAuMTDKTbK2uQI-jj48q4X9FlRG_OKg&s" group-title="Zee | Sportlink", Zee Cinema HD
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=f56beaac9f124616872c741c9ce4fa4e:5d40a903238f4ad98abbed1877d4e3d1
+https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeecinemahd/default/manifest.mpd
+
 
 #EXTINF:-1 tvg-logo="https://www.sonypicturesnetworks.com/images/logos/Sony_WAH.png",Sony Wah (1080p)
 #EXTINF:-1 tvg-logo="https://i.imgur.com/CKLn0ft.png",B4U Kadak
