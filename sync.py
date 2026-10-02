@@ -78,14 +78,13 @@
 
 # ////////////////////////////////////////////////////////////////////////////////
 
-
 import re, json, os, urllib.request, urllib.parse
 
 OWNER, REPO = "sportlive18", "jio-tv-auto-update-playlist"
 MINE = "data/Entertainments.m3u"
 UA = {"User-Agent": "Mozilla/5.0"}
 
-# def api(path):
+def api(path):
     url = "https://api.github.com/repos/%s/%s" % (OWNER, REPO)
     if path:
         url += "/" + path
@@ -161,7 +160,7 @@ for u in files:
         if not k:
             continue
         lst = friend.setdefault(k, [])
-        if url_of(body) not in [url_of(b) for b in lst]:   # skip duplicate urls
+        if url_of(body) not in [url_of(b) for b in lst]:
             lst.append(body)
 
 # ---- update my file ----
