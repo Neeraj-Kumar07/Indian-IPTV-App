@@ -1,0 +1,76 @@
+import re, urllib.request
+
+FRIEND = "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/main/ALL.m3u"  # check branch name
+MINE = "data/Entertainments.m3u"
+
+def tvg(extinf):
+    m = re.search(r'tvg-id="([^"]+)"', extinf)
+    return m.group(1).lower() if m else None
+
+def parse(text):
+    head, blocks = [], []
+    for line in text.splitlines():
+        if line.startswith("#EXTINF"):
+            blocks.append([line, []])
+        elif blocks:
+            if line.strip():
+                blocks[-1][1].append(line)
+        else:
+            head.append(line)
+    return head, blocks
+
+def url_of(body):
+    return next((l for l in reversed(body) if not l.startswith("#")), None)
+
+def alive(body):
+    url = url_of(body)
+    if not url:
+        return False
+    h = {"User-Agent": "Mozilla/5.0"}
+    for l in body:
+        low = l.lower()
+        if low.startswith("#extvlcopt:http-user-agent="):
+            h["User-Agent"] = l.split("=", 1)[1]
+        elif low.startswith("#extvlcopt:http-referrer="):
+            h["Referer"] = l.split("=", 1)[1]
+    try:
+        r = urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=10)
+        data = r.read(2048).decode("utf-8", "ignore")
+        if r.status != 200:
+            return False
+        u = url.lower()
+        if ".m3u8" in u:
+            return "#EXTM3U" in data
+        if ".mpd" in u:
+            return "<MPD" in data
+        return True
+    except Exception:
+        return False
+
+_, fblocks = parse(urllib.request.urlopen(FRIEND, timeout=60).read().decode("utf-8", "ignore"))
+friend = {}
+for extinf, body in fblocks:
+    k = tvg(extinf)
+    if k:
+        friend.setdefault(k, []).append(body)
+
+head, mine = parse(open(MINE, encoding="utf-8").read())
+changed = 0
+for block in mine:
+    k = tvg(block[0])
+    if not k or k not in friend:
+        continue                      # no tvg-id -> never touched
+    if alive(block[1]):
+        continue                      # working -> keep
+    new = next((b for b in friend[k] if url_of(b) != url_of(block[1]) and alive(b)), None)
+    name = block[0].split(",")[-1]
+    if new:
+        block[1] = new
+        changed += 1
+        print("replaced:", name)
+    else:
+        print("dead, no working replacement:", name)
+
+if changed:
+    out = head + [x for extinf, body in mine for x in [extinf] + body]
+    open(MINE, "w", encoding="utf-8").write("\n".join(out) + "\n")
