@@ -131,7 +131,15 @@ import urllib.request
 
 SOURCES = [
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
+
+    "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/6694404c0ce9b362575724390c3875620d26f9d6/ALL.m3u",
+    "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/main/sony.m3u",
+    "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/6694404c0ce9b362575724390c3875620d26f9d6/sony6.m3u",
 ]
+
 MINE = "data/Entertainments.m3u"
 
 EXPIRY_MARGIN = 600        # treat a token as dead 10 min before its exp= time
