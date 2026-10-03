@@ -1,262 +1,6 @@
-// import 'dart:async';
 //
-// import 'package:flutter/material.dart';
-// import '/screens/player.dart';
-// import '../model/channel.dart';
-// import '../model/stream_source.dart';
-// import '../provider/channels_provider.dart';
+// ////////////////////////////////////////////////////
 //
-// class Home extends StatefulWidget {
-//   const Home({Key? key}) : super(key: key);
-//
-//   @override
-//   _HomeState createState() => _HomeState();
-// }
-//
-// class _HomeState extends State<Home> {
-//   List<Channel> channels = [];
-//   List<Channel> filteredChannels = [];
-//   List<StreamSource> streamSources = [];
-//   StreamSource? selectedSource;
-//
-//   TextEditingController searchController = TextEditingController();
-//
-//   // Focus for the search box.
-//   final FocusNode _searchFocusNode = FocusNode();
-//
-//   // Focus nodes for the channel rows.
-//   final List<FocusNode> _channelFocusNodes = [];
-//
-//   final ChannelsProvider channelsProvider = ChannelsProvider();
-//
-//   bool _isLoading = true;
-//   Timer? _debounceTimer;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     fetchStreamSources();
-//   }
-//
-//   Future<void> fetchStreamSources() async {
-//     try {
-//       final sources = await channelsProvider.fetchStreamSources();
-//       setState(() {
-//         streamSources = sources;
-//         _isLoading = false;
-//       });
-//     } catch (e) {
-//       if (mounted) {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           const SnackBar(
-//             content: Text('There was a problem loading stream categories'),
-//           ),
-//         );
-//       }
-//       setState(() => _isLoading = false);
-//     }
-//   }
-//
-//   Future<void> fetchChannels(StreamSource source) async {
-//     setState(() {
-//       _isLoading = true;
-//       selectedSource = source;
-//       searchController.clear();
-//     });
-//
-//     try {
-//       final data = await channelsProvider.fetchM3UFile(source.streamUrl);
-//       setState(() {
-//         channels = data;
-//         filteredChannels = data;
-//         _isLoading = false;
-//       });
-//     } catch (e) {
-//       if (mounted) {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           const SnackBar(
-//             content: Text('There was a problem loading channels'),
-//           ),
-//         );
-//       }
-//       setState(() {
-//         selectedSource = null;
-//         _isLoading = false;
-//       });
-//     }
-//   }
-//
-//   void backToCategories() {
-//     setState(() {
-//       selectedSource = null;
-//       channels = [];
-//       filteredChannels = [];
-//       searchController.clear();
-//     });
-//   }
-//
-//   void filterChannels(String query) {
-//     if (_debounceTimer != null) {
-//       _debounceTimer!.cancel();
-//     }
-//     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
-//       final filteredData = channelsProvider.filterChannels(query);
-//       setState(() {
-//         filteredChannels = filteredData;
-//       });
-//     });
-//   }
-//
-//   @override
-//   void dispose() {
-//     _debounceTimer?.cancel();
-//     searchController.dispose();
-//     super.dispose();
-//   }
-//
-//   // @override
-//   // Widget build(BuildContext context) {
-//   //   if (_isLoading) {
-//   //     return const Center(child: CircularProgressIndicator());
-//   //   }
-//   //
-//   //   if (selectedSource == null) {
-//   //     return _buildCategoryList();
-//   //   }
-//   //
-//   //   return _buildChannelList();
-//   // }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return PopScope(
-//       // Only allow the app to close when we're on the category (stream) page
-//       canPop: selectedSource == null,
-//       onPopInvokedWithResult: (didPop, result) {
-//         if (didPop) return;
-//         // Back pressed while inside a channel list: go to categories instead
-//         backToCategories();
-//       },
-//       child: _buildBody(),
-//     );
-//   }
-//
-//   Widget _buildBody() {
-//     if (_isLoading) {
-//       return const Center(child: CircularProgressIndicator());
-//     }
-//
-//     if (selectedSource == null) {
-//       return _buildCategoryList();
-//     }
-//
-//     return _buildChannelList();
-//   }
-//
-//   Widget _buildCategoryList() {
-//     if (streamSources.isEmpty) {
-//       return const Center(child: Text('No stream categories available'));
-//     }
-//
-//     return ListView.builder(
-//       padding: const EdgeInsets.all(16),
-//       itemCount: streamSources.length,
-//       itemBuilder: (context, index) {
-//         final source = streamSources[index];
-//         return Padding(
-//           padding: const EdgeInsets.only(bottom: 12),
-//           child: ElevatedButton(
-//             style: ElevatedButton.styleFrom(
-//               padding: const EdgeInsets.symmetric(vertical: 16),
-//             ),
-//             onPressed: () => fetchChannels(source),
-//             child: Text(
-//               source.name,
-//               style: const TextStyle(fontSize: 16),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-//
-//   Widget _buildChannelList() {
-//     return Column(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-//           child: Row(
-//             children: [
-//               IconButton(
-//                 icon: const Icon(Icons.arrow_back),
-//                 onPressed: backToCategories,
-//               ),
-//               Expanded(
-//                 child: Text(
-//                   selectedSource!.name,
-//                   style: Theme.of(context).textTheme.titleMedium,
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//         Padding(
-//           padding: const EdgeInsets.all(8.0),
-//           child: TextField(
-//             controller: searchController,
-//             onChanged: filterChannels,
-//             decoration: const InputDecoration(
-//               labelText: 'Search',
-//               hintText: 'Search channels...',
-//               prefixIcon: Icon(Icons.search),
-//               border: OutlineInputBorder(),
-//             ),
-//           ),
-//         ),
-//         Expanded(
-//           child: filteredChannels.isEmpty
-//               ? const Center(child: Text('No channels found'))
-//               : ListView.builder(
-//                   itemCount: filteredChannels.length,
-//                   itemBuilder: (context, index) {
-//                     return ListTile(
-//                       leading: Image.network(
-//                         filteredChannels[index].logoUrl,
-//                         width: 50,
-//                         height: 50,
-//                         fit: BoxFit.contain,
-//                         errorBuilder: (context, error, stackTrace) {
-//                           return Image.asset(
-//                             'assets/images/tv-icon.png',
-//                             width: 50,
-//                             height: 50,
-//                             fit: BoxFit.contain,
-//                           );
-//                         },
-//                       ),
-//                       title: Text(filteredChannels[index].name),
-//                       onTap: () {
-//                         Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                             builder: (context) => Player(
-//                               channel: filteredChannels[index],
-//                             ),
-//                           ),
-//                         );
-//                       },
-//                     );
-//                   },
-//                 ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-
-////////////////////////////////////////////////////
-
 // import 'dart:async';
 //
 // import 'package:flutter/material.dart';
@@ -268,16 +12,16 @@
 // import '../provider/channels_provider.dart';
 //
 // class Home extends StatefulWidget {
-//   const Home({Key? key}) : super(key: key);
+//   const Home({super.key});
 //
 //   @override
-//   _HomeState createState() => _HomeState();
+//   State<Home> createState() => _HomeState();
 // }
 //
 // class _HomeState extends State<Home> {
 //   // Height of one channel row (including margin). Fixed so we can
 //   // calculate scroll offsets for off-screen rows.
-//   static const double _itemExtent = 88;
+//   static const double _itemExtent = 104;
 //
 //   List<Channel> channels = [];
 //   List<Channel> filteredChannels = [];
@@ -328,8 +72,7 @@
 //
 //   void _updateChannelFocusNodes() {
 //     if (_channelFocusNodes.length > filteredChannels.length) {
-//       final extra =
-//       _channelFocusNodes.sublist(filteredChannels.length);
+//       final extra = _channelFocusNodes.sublist(filteredChannels.length);
 //       _channelFocusNodes.removeRange(
 //           filteredChannels.length, _channelFocusNodes.length);
 //       _disposeLater(extra);
@@ -642,7 +385,10 @@
 //             ).copyWith(
 //               overlayColor: WidgetStateProperty.resolveWith((states) {
 //                 if (states.contains(WidgetState.focused)) {
-//                   return Theme.of(context).colorScheme.primary.withValues(alpha: 0.35);
+//                   return Theme.of(context)
+//                       .colorScheme
+//                       .primary
+//                       .withValues(alpha: 0.35);
 //                 }
 //                 return null;
 //               }),
@@ -735,8 +481,7 @@
 //                   decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(8),
 //                     border: Border.all(
-//                       color:
-//                       node.hasFocus ? primary : Colors.transparent,
+//                       color: node.hasFocus ? primary : Colors.transparent,
 //                       width: 3,
 //                     ),
 //                     color: node.hasFocus
@@ -785,7 +530,9 @@
 //   }
 // }
 
-////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
 
 import 'dart:async';
 
@@ -807,7 +554,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // Height of one channel row (including margin). Fixed so we can
   // calculate scroll offsets for off-screen rows.
-  static const double _itemExtent = 88;
+  // CHANGED: 104 so the 3-line tile (name, ID, group) fits.
+  static const double _itemExtent = 104;
 
   List<Channel> channels = [];
   List<Channel> filteredChannels = [];
@@ -1006,6 +754,8 @@ class _HomeState extends State<Home> {
   // SEARCH
   // ------------------------------------------------------------
 
+  // Uses channelsProvider.filterChannels, which now searches
+  // name + tvg-id + group-title (see channels_provider.dart).
   void filterChannels(String query) {
     _debounceTimer?.cancel();
 
@@ -1229,7 +979,8 @@ class _HomeState extends State<Home> {
             onChanged: filterChannels,
             decoration: const InputDecoration(
               labelText: 'Search',
-              hintText: 'Search channels...',
+              // CHANGED: hint now mentions ID and group search.
+              hintText: 'Search by name, ID or group...',
               prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(),
             ),
@@ -1274,36 +1025,87 @@ class _HomeState extends State<Home> {
                         ? primary.withValues(alpha: 0.10)
                         : Colors.transparent,
                   ),
-                  // ExcludeFocus: ListTile must not steal focus
+                  // ExcludeFocus: the tile must not steal focus
                   // from the row's own Focus node.
                   child: ExcludeFocus(
-                    child: ListTile(
-                      leading: Image.network(
-                        channel.logoUrl,
-                        width: 64,
-                        height: 64,
-                        fit: BoxFit.contain,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            'assets/images/tv-icon.png',
-                            width: 64,
-                            height: 64,
-                            fit: BoxFit.contain,
-                          );
-                        },
-                      ),
-                      title: Text(
-                        channel.name,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                    // CHANGED: ListTile replaced with InkWell + Row so the
+                    // tile can show: logo | name (bold) / ID / • group.
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(8),
+                      onTap: () => _playChannel(index),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        child: Row(
+                          children: [
+                            // CHANGED: logo from tvg-logo; falls back to
+                            // the local TV icon if missing or failing.
+                            SizedBox(
+                              width: 64,
+                              height: 64,
+                              child: channel.logoUrl.startsWith('http')
+                                  ? Image.network(
+                                channel.logoUrl,
+                                fit: BoxFit.contain,
+                                errorBuilder:
+                                    (context, error, stackTrace) =>
+                                    Image.asset(
+                                      'assets/images/tv-icon.png',
+                                      fit: BoxFit.contain,
+                                    ),
+                              )
+                                  : Image.asset(
+                                channel.logoUrl,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  // CHANGED: channel name in bold.
+                                  Text(
+                                    channel.name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  // CHANGED (new): tvg-id line,
+                                  // "No ID" when missing.
+                                  Text(
+                                    'ID: ${channel.displayId}',
+                                    maxLines: 1,
+                                    style: const TextStyle(fontSize: 15),
+                                  ),
+                                  // CHANGED (new): group-title line,
+                                  // smaller, "No Group" when missing.
+                                  Text(
+                                    '• ${channel.displayGroup}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      onTap: () => _playChannel(index),
                     ),
                   ),
                 ),
