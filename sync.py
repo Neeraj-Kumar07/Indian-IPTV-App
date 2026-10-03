@@ -132,7 +132,7 @@ import urllib.request
 SOURCES = [
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
-    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
+    "https://github.com/sportlive18/jio-tv-auto-update-playlist/blob/b16d9b7c3363328098e1a0c1336a3af0709aa006/voot.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
 
     "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/6694404c0ce9b362575724390c3875620d26f9d6/ALL.m3u",
