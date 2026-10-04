@@ -33,7 +33,7 @@ name: sync-channels
 
 on:
   schedule:
-    - cron: "15 * * * *"   # every hour (Jio tokens last only ~6 hours)
+    - cron: "7,37 * * * *"   # every hour (Jio tokens last only ~6 hours)
   workflow_dispatch:
 
 permissions:
