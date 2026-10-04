@@ -132,11 +132,31 @@ import urllib.request
 SOURCES = [
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S10.m3u",
     "https://github.com/sportlive18/jio-tv-auto-update-playlist/blob/b16d9b7c3363328098e1a0c1336a3af0709aa006/voot.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S1.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S11.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S2.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S3.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S4.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S5.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S6.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S7.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S8.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S9.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S2.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S1.m3u",
+    "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/b16d9b7c3363328098e1a0c1336a3af0709aa006/mixiptv2.m3u",
+    "https://raw.githubusercontent.com/bugsfreeweb/LiveTVCollector/cbc826b7c9d8e9e226ac353c3c241b6ad50a37fa/LiveTV/India/LiveTV.m3u",
+    "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/b16d9b7c3363328098e1a0c1336a3af0709aa006/mixiptv.m3u",
+
+
 
     "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/6694404c0ce9b362575724390c3875620d26f9d6/ALL.m3u",
     "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/main/sony.m3u",
+    "https://raw.githubusercontent.com/bugsfreeweb/LiveTVCollector/cbc826b7c9d8e9e226ac353c3c241b6ad50a37fa/LiveTV/India/LiveTV.m3u",
     "https://raw.githubusercontent.com/sportlive18/jio-tv-auto-update-playlist/6694404c0ce9b362575724390c3875620d26f9d6/sony6.m3u",
 ]
 
