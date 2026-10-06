@@ -1,5 +1,8 @@
 //
-// ////////////////////////////////////////////////////
+//
+// ////////////////////////////////////////////////////////////////
+//
+//
 //
 // import 'dart:async';
 //
@@ -21,6 +24,7 @@
 // class _HomeState extends State<Home> {
 //   // Height of one channel row (including margin). Fixed so we can
 //   // calculate scroll offsets for off-screen rows.
+//   // CHANGED: 104 so the 3-line tile (name, ID, group) fits.
 //   static const double _itemExtent = 104;
 //
 //   List<Channel> channels = [];
@@ -220,6 +224,8 @@
 //   // SEARCH
 //   // ------------------------------------------------------------
 //
+//   // Uses channelsProvider.filterChannels, which now searches
+//   // name + tvg-id + group-title (see channels_provider.dart).
 //   void filterChannels(String query) {
 //     _debounceTimer?.cancel();
 //
@@ -443,7 +449,8 @@
 //             onChanged: filterChannels,
 //             decoration: const InputDecoration(
 //               labelText: 'Search',
-//               hintText: 'Search channels...',
+//               // CHANGED: hint now mentions ID and group search.
+//               hintText: 'Search by name, ID or group...',
 //               prefixIcon: Icon(Icons.search),
 //               border: OutlineInputBorder(),
 //             ),
@@ -488,36 +495,87 @@
 //                         ? primary.withValues(alpha: 0.10)
 //                         : Colors.transparent,
 //                   ),
-//                   // ExcludeFocus: ListTile must not steal focus
+//                   // ExcludeFocus: the tile must not steal focus
 //                   // from the row's own Focus node.
 //                   child: ExcludeFocus(
-//                     child: ListTile(
-//                       leading: Image.network(
-//                         channel.logoUrl,
-//                         width: 64,
-//                         height: 64,
-//                         fit: BoxFit.contain,
-//                         errorBuilder: (context, error, stackTrace) {
-//                           return Image.asset(
-//                             'assets/images/tv-icon.png',
-//                             width: 64,
-//                             height: 64,
-//                             fit: BoxFit.contain,
-//                           );
-//                         },
-//                       ),
-//                       title: Text(
-//                         channel.name,
-//                         style: const TextStyle(
-//                           fontSize: 20,
-//                           fontWeight: FontWeight.w500,
+//                     // CHANGED: ListTile replaced with InkWell + Row so the
+//                     // tile can show: logo | name (bold) / ID / • group.
+//                     child: InkWell(
+//                       borderRadius: BorderRadius.circular(8),
+//                       onTap: () => _playChannel(index),
+//                       child: Padding(
+//                         padding: const EdgeInsets.symmetric(
+//                           horizontal: 12,
+//                           vertical: 8,
+//                         ),
+//                         child: Row(
+//                           children: [
+//                             // CHANGED: logo from tvg-logo; falls back to
+//                             // the local TV icon if missing or failing.
+//                             SizedBox(
+//                               width: 64,
+//                               height: 64,
+//                               child: channel.logoUrl.startsWith('http')
+//                                   ? Image.network(
+//                                 channel.logoUrl,
+//                                 fit: BoxFit.contain,
+//                                 errorBuilder:
+//                                     (context, error, stackTrace) =>
+//                                     Image.asset(
+//                                       'assets/images/tv-icon.png',
+//                                       fit: BoxFit.contain,
+//                                     ),
+//                               )
+//                                   : Image.asset(
+//                                 channel.logoUrl,
+//                                 fit: BoxFit.contain,
+//                               ),
+//                             ),
+//                             const SizedBox(width: 16),
+//                             Expanded(
+//                               child: Column(
+//                                 mainAxisAlignment:
+//                                 MainAxisAlignment.center,
+//                                 crossAxisAlignment:
+//                                 CrossAxisAlignment.start,
+//                                 children: [
+//                                   // CHANGED: channel name in bold.
+//                                   Text(
+//                                     channel.name,
+//                                     maxLines: 1,
+//                                     overflow: TextOverflow.ellipsis,
+//                                     style: const TextStyle(
+//                                       fontSize: 20,
+//                                       fontWeight: FontWeight.bold,
+//                                     ),
+//                                   ),
+//                                   const SizedBox(height: 2),
+//                                   // CHANGED (new): tvg-id line,
+//                                   // "No ID" when missing.
+//                                   Text(
+//                                     'ID: ${channel.displayId}',
+//                                     maxLines: 1,
+//                                     style: const TextStyle(fontSize: 15),
+//                                   ),
+//                                   // CHANGED (new): group-title line,
+//                                   // smaller, "No Group" when missing.
+//                                   Text(
+//                                     '• ${channel.displayGroup}',
+//                                     maxLines: 1,
+//                                     overflow: TextOverflow.ellipsis,
+//                                     style: TextStyle(
+//                                       fontSize: 13,
+//                                       color: Theme.of(context)
+//                                           .colorScheme
+//                                           .onSurfaceVariant,
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
+//                             ),
+//                           ],
 //                         ),
 //                       ),
-//                       contentPadding: const EdgeInsets.symmetric(
-//                         horizontal: 12,
-//                         vertical: 8,
-//                       ),
-//                       onTap: () => _playChannel(index),
 //                     ),
 //                   ),
 //                 ),
@@ -529,10 +587,6 @@
 //     );
 //   }
 // }
-
-////////////////////////////////////////////////////////////////
-
-
 
 import 'dart:async';
 
@@ -552,10 +606,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // Height of one channel row (including margin). Fixed so we can
-  // calculate scroll offsets for off-screen rows.
-  // CHANGED: 104 so the 3-line tile (name, ID, group) fits.
-  static const double _itemExtent = 104;
+  // Grid layout. Tile width is flexible (columns are computed from the
+  // screen width); height is fixed so scroll offsets can be calculated.
+  static const double _tileHeight = 96;
+  static const double _spacing = 8;
+  static const double _gridPadding = 8;
+
+  // Screens narrower than this (phones) get 1 column, wider ones (TV,
+  // tablet, emulator) get 3. Set from LayoutBuilder in build; used by the
+  // key handlers and scroll maths.
+  static const double _phoneBreakpoint = 600;
+  static const int _tvColumns = 3;
+  int _columns = 1;
 
   List<Channel> channels = [];
   List<Channel> filteredChannels = [];
@@ -631,16 +693,17 @@ class _HomeState extends State<Home> {
     if (!_scrollController.hasClients) return;
 
     final position = _scrollController.position;
-    final top = index * _itemExtent;
-    final bottom = top + _itemExtent;
+    final row = index ~/ _columns;
+    final top = _gridPadding + row * (_tileHeight + _spacing);
+    final bottom = top + _tileHeight;
     final offset = position.pixels;
     final viewport = position.viewportDimension;
 
     double? target;
-    if (top < offset) {
-      target = top;
-    } else if (bottom > offset + viewport) {
-      target = bottom - viewport;
+    if (top - _gridPadding < offset) {
+      target = top - _gridPadding;
+    } else if (bottom + _gridPadding > offset + viewport) {
+      target = bottom + _gridPadding - viewport;
     }
 
     if (target != null) {
@@ -653,7 +716,7 @@ class _HomeState extends State<Home> {
   void _focusChannel(int index) {
     if (index < 0 || index >= _channelFocusNodes.length) return;
 
-    // 1. Scroll so the row gets built.
+    // 1. Scroll so the tile gets built.
     _ensureVisible(index);
 
     // 2. Focus it once it exists.
@@ -754,7 +817,7 @@ class _HomeState extends State<Home> {
   // SEARCH
   // ------------------------------------------------------------
 
-  // Uses channelsProvider.filterChannels, which now searches
+  // Uses channelsProvider.filterChannels, which searches
   // name + tvg-id + group-title (see channels_provider.dart).
   void filterChannels(String query) {
     _debounceTimer?.cancel();
@@ -829,22 +892,40 @@ class _HomeState extends State<Home> {
     return KeyEventResult.ignored;
   }
 
-  // Channel row: UP / DOWN / OK
+  // Channel tile: UP / DOWN / LEFT / RIGHT / OK
   KeyEventResult _handleChannelKey(int index, FocusNode node, KeyEvent event) {
     if (event is KeyDownEvent || event is KeyRepeatEvent) {
       final key = event.logicalKey;
+      final total = _channelFocusNodes.length;
+      final cols = _columns;
 
       if (key == LogicalKeyboardKey.arrowUp) {
-        if (index == 0) {
-          _searchFocusNode.requestFocus();
+        if (index < cols) {
+          _searchFocusNode.requestFocus(); // top row -> search
         } else {
-          _focusChannel(index - 1);
+          _focusChannel(index - cols);
         }
         return KeyEventResult.handled;
       }
 
       if (key == LogicalKeyboardKey.arrowDown) {
-        if (index + 1 < _channelFocusNodes.length) {
+        final next = index + cols;
+        if (next < total) {
+          _focusChannel(next);
+        } else if (index ~/ cols < (total - 1) ~/ cols) {
+          // Last row is shorter: go to its last item instead of doing nothing.
+          _focusChannel(total - 1);
+        }
+        return KeyEventResult.handled;
+      }
+
+      if (key == LogicalKeyboardKey.arrowLeft) {
+        if (index % cols != 0) _focusChannel(index - 1);
+        return KeyEventResult.handled;
+      }
+
+      if (key == LogicalKeyboardKey.arrowRight) {
+        if ((index + 1) % cols != 0 && index + 1 < total) {
           _focusChannel(index + 1);
         }
         return KeyEventResult.handled;
@@ -979,7 +1060,6 @@ class _HomeState extends State<Home> {
             onChanged: filterChannels,
             decoration: const InputDecoration(
               labelText: 'Search',
-              // CHANGED: hint now mentions ID and group search.
               hintText: 'Search by name, ID or group...',
               prefixIcon: Icon(Icons.search),
               border: OutlineInputBorder(),
@@ -991,129 +1071,149 @@ class _HomeState extends State<Home> {
         Expanded(
           child: filteredChannels.isEmpty
               ? const Center(child: Text('No channels found'))
-              : ListView.builder(
-            controller: _scrollController,
-            itemExtent: _itemExtent,
-            itemCount: filteredChannels.length,
-            itemBuilder: (context, index) {
-              if (index >= _channelFocusNodes.length) {
-                return const SizedBox.shrink();
-              }
+              : LayoutBuilder(
+            builder: (context, constraints) {
+              _columns = constraints.maxWidth < _phoneBreakpoint
+                  ? 1
+                  : _tvColumns;
 
-              final channel = filteredChannels[index];
-              final node = _channelFocusNodes[index];
-
-              return Focus(
-                focusNode: node,
-                onFocusChange: (_) {
-                  if (mounted) setState(() {});
-                },
-                onKeyEvent: (n, event) =>
-                    _handleChannelKey(index, n, event),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: node.hasFocus ? primary : Colors.transparent,
-                      width: 3,
-                    ),
-                    color: node.hasFocus
-                        ? primary.withValues(alpha: 0.10)
-                        : Colors.transparent,
-                  ),
-                  // ExcludeFocus: the tile must not steal focus
-                  // from the row's own Focus node.
-                  child: ExcludeFocus(
-                    // CHANGED: ListTile replaced with InkWell + Row so the
-                    // tile can show: logo | name (bold) / ID / • group.
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(8),
-                      onTap: () => _playChannel(index),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        child: Row(
-                          children: [
-                            // CHANGED: logo from tvg-logo; falls back to
-                            // the local TV icon if missing or failing.
-                            SizedBox(
-                              width: 64,
-                              height: 64,
-                              child: channel.logoUrl.startsWith('http')
-                                  ? Image.network(
-                                channel.logoUrl,
-                                fit: BoxFit.contain,
-                                errorBuilder:
-                                    (context, error, stackTrace) =>
-                                    Image.asset(
-                                      'assets/images/tv-icon.png',
-                                      fit: BoxFit.contain,
-                                    ),
-                              )
-                                  : Image.asset(
-                                channel.logoUrl,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.center,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  // CHANGED: channel name in bold.
-                                  Text(
-                                    channel.name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  // CHANGED (new): tvg-id line,
-                                  // "No ID" when missing.
-                                  Text(
-                                    'ID: ${channel.displayId}',
-                                    maxLines: 1,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  // CHANGED (new): group-title line,
-                                  // smaller, "No Group" when missing.
-                                  Text(
-                                    '• ${channel.displayGroup}',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurfaceVariant,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+              return GridView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(_gridPadding),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: _columns,
+                  mainAxisExtent: _tileHeight,
+                  crossAxisSpacing: _spacing,
+                  mainAxisSpacing: _spacing,
                 ),
+                itemCount: filteredChannels.length,
+                itemBuilder: (context, index) {
+                  if (index >= _channelFocusNodes.length) {
+                    return const SizedBox.shrink();
+                  }
+                  return _buildChannelTile(index, primary);
+                },
               );
             },
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildChannelTile(int index, Color primary) {
+    final channel = filteredChannels[index];
+    final node = _channelFocusNodes[index];
+
+    return Focus(
+      focusNode: node,
+      onFocusChange: (_) {
+        if (mounted) setState(() {});
+      },
+      onKeyEvent: (n, event) => _handleChannelKey(index, n, event),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          // Focused: bold primary border + tint. Unfocused: soft card.
+          border: Border.all(
+            color: node.hasFocus
+                ? primary
+                : Theme.of(context).colorScheme.outlineVariant,
+            width: node.hasFocus ? 3 : 1.2,
+          ),
+          color: node.hasFocus
+              ? Color.alphaBlend(
+              primary.withValues(alpha: 0.12),
+              Theme.of(context).colorScheme.surfaceContainerLowest)
+              : Theme.of(context).colorScheme.surfaceContainerLowest,
+          boxShadow: [
+            BoxShadow(
+              color: node.hasFocus
+                  ? primary.withValues(alpha: 0.35)
+                  : Colors.black.withValues(alpha: 0.08),
+              blurRadius: node.hasFocus ? 12 : 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        // ExcludeFocus: the tile must not steal focus
+        // from the Focus node above.
+        child: ExcludeFocus(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(14),
+            onTap: () => _playChannel(index),
+            child: Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Row(
+                children: [
+                  // Logo from tvg-logo; falls back to the local TV icon
+                  // if missing or failing.
+                  SizedBox(
+                    width: 64,
+                    height: 64,
+                    child: channel.logoUrl.startsWith('http')
+                        ? Image.network(
+                      channel.logoUrl,
+                      fit: BoxFit.contain,
+                      // Some logo CDNs reject Dart's default
+                      // User-Agent, so send a browser-like one.
+                      headers: const {
+                        'User-Agent':
+                        'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 '
+                            '(KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36',
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        // Shows the exact reason in the debug console.
+                        debugPrint(
+                            'Logo failed: ${channel.logoUrl} -> $error');
+                        return Image.asset('assets/images/tv-icon.png',
+                            fit: BoxFit.contain);
+                      },
+                    )
+                        : Image.asset(channel.logoUrl, fit: BoxFit.contain),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          channel.displayName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          'ID: ${channel.displayId}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          '• ${channel.displayGroup}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color:
+                            Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
