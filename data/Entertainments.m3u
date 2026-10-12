@@ -2479,7 +2479,14 @@ https://n18syndication.akamaized.net/bpk-tv/News18_Rajasthan_NW18_MOB/output01/m
 #EXTHTTP:{"Cookie":"__hdnea__=st=1791792004~exp=1791813604~acl=/*~hmac=7b3ecc0f2209e95df94f210e759250624495bf99fe142db6eac49853e16087ee","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/News18Rajasthan_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="693" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News18BiharJK.png" group-title="Bhojpuri",news18 Bihar Jharkhand
-https://n18syndication.akamaized.net/bpk-tv/News18_Bihar_Jharkhand_NW18_MOB/output01/master.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=d267777c26755c52b6971b41702c45ac:becc53de132aadc7d24702963bc91df9
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5
+#EXTVLCOPT:http-referrer=https://www.jiotv.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.jiotv.com
+#EXTVLCOPT:http-cookie=__hdnea__=st=1791799203~exp=1791820803~acl=/*~hmac=541bd4e08217f40e7227aedc6edeabc883b2b40d9067142044059cac2b4c58a1
+#EXTHTTP:{"Cookie":"__hdnea__=st=1791799203~exp=1791820803~acl=/*~hmac=541bd4e08217f40e7227aedc6edeabc883b2b40d9067142044059cac2b4c58a1","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/News18BiharJK_MOB/WDVLive/index.mpd?__hdnea__=st=1791799203~exp=1791820803~acl=/*~hmac=541bd4e08217f40e7227aedc6edeabc883b2b40d9067142044059cac2b4c58a1
 #EXTINF:-1 tvg-id="1504" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News18_Bihar_Jharkhand_NW18.png" group-title="News",News18 Bihar Jharkhand.
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
