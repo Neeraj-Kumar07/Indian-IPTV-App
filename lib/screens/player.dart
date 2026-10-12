@@ -1095,15 +1095,26 @@ class _PlayerState extends State<Player> {
   // Format helpers
   // ------------------------------------------------------------
 
+  // BetterPlayerVideoFormat _formatFor(String url) {
+  //   final value = url.toLowerCase();
+  //
+  //   if (widget.channel.isDash || value.contains('.mpd')) {
+  //     return BetterPlayerVideoFormat.dash;
+  //   }
+  //   if (value.contains('.m3u8')) {
+  //     return BetterPlayerVideoFormat.hls;
+  //   }
+  //   return BetterPlayerVideoFormat.other;
+  // }
+
   BetterPlayerVideoFormat _formatFor(String url) {
     final value = url.toLowerCase();
 
-    if (widget.channel.isDash || value.contains('.mpd')) {
-      return BetterPlayerVideoFormat.dash;
-    }
-    if (value.contains('.m3u8')) {
-      return BetterPlayerVideoFormat.hls;
-    }
+    if (value.contains('.mpd')) return BetterPlayerVideoFormat.dash;
+    if (value.contains('.m3u8')) return BetterPlayerVideoFormat.hls;
+
+    // No extension in the URL: fall back to the playlist's hint.
+    if (widget.channel.isDash) return BetterPlayerVideoFormat.dash;
     return BetterPlayerVideoFormat.other;
   }
 

@@ -505,6 +505,9 @@
 //  * no notifyListeners() at the end of fetchM3UFile (the original never had it)
 // Header parsing is unchanged.
 
+// THIS FILE CONTAIN "lib/provider/channels_provider.dart" CODE
+
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
