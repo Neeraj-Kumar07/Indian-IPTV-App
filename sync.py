@@ -383,9 +383,9 @@ FFMPEG_PATH = os.environ.get("FFMPEG_PATH") or (
     _WIN_FFMPEG if os.path.isfile(_WIN_FFMPEG) else (shutil.which("ffmpeg") or "ffmpeg"))
 DECODE_SECONDS = 4          # how much video to really decode
 FFMPEG_TIMEOUT = 15         # seconds to wait on network inside ffmpeg
-MAX_WORKERS = 4             # parallel health checks
+MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "4"))   # parallel health checks
 SHAKY_IS_OK = True          # decoded but printed startup warnings -> count as working
-UNVERIFIED_FALLBACK = False # if mine is dead and no candidate can be verified (HTTP 401/403/451
+UNVERIFIED_FALLBACK = os.environ.get("UNVERIFIED_FALLBACK", "0") == "1"  # if mine is dead and no candidate can be verified (HTTP 401/403/451
                             # from this machine), copy the fresh one anyway? Old behaviour = True
 NULL_OUT = "NUL" if os.name == "nt" else "/dev/null"
 
@@ -524,7 +524,7 @@ def parse_keys(raw, headers):
 
 
 def decode_test(url, headers, key):
-    """Really decode a few seconds of video. Returns 'ok' | 'shaky' | 'fail'."""
+    """Really decode a few seconds of video. Returns (state, note); state = ok | shaky | fail."""
     hdrs = dict(headers)
     ua = hdrs.pop("User-Agent", UA)
     hdr_str = "".join("%s: %s\r\n" % (k, v) for k, v in hdrs.items())
@@ -539,18 +539,23 @@ def decode_test(url, headers, key):
     try:
         r = subprocess.run(cmd, capture_output=True, text=True,
                            timeout=FFMPEG_TIMEOUT + DECODE_SECONDS + 25)
-    except Exception:
-        return "fail"
+    except FileNotFoundError:
+        return "fail", "ffmpeg not found"
+    except Exception as e:
+        return "fail", "ffmpeg error: %s" % str(e)[:60]
+    err = (r.stderr or "").strip().splitlines()
+    last = err[-1][:80] if err else ""
     if r.returncode != 0:
-        return "fail"
-    return "shaky" if (r.stderr or "").strip() else "ok"
+        return "fail", last or "ffmpeg exit %d" % r.returncode
+    return ("shaky", last) if err else ("ok", "")
 
 
 def probe(body):
-    """True = plays, False = dead, None = can't tell (HTTP 401/403/451 from this machine)."""
+    """Returns (verdict, reason). verdict: True = plays, False = dead,
+    None = can't tell (HTTP 401/403/451 from this machine)."""
     url = url_of(body)
     if not url:
-        return False
+        return False, "no url"
     url = url.split("|")[0].strip()
     if url.endswith("?"):
         url = url[:-1]
@@ -561,16 +566,16 @@ def probe(body):
         status = r.status_code
         text = next(r.iter_content(chunk_size=262144), b"").decode("utf-8", "ignore")
         r.close()
-    except Exception:
-        return False
+    except Exception as e:
+        return False, "request failed: %s" % str(e)[:60]
     if status in (401, 403, 451):
-        return None
+        return None, "HTTP %d (blocked for this server)" % status
     if status != 200:
-        return False
+        return False, "HTTP %d" % status
 
     is_mpd = "<mpd" in text.lower()
     if not is_mpd and "#EXTM3U" not in text:
-        return False
+        return False, "HTTP 200 but not a manifest"
 
     candidates = []
     if is_mpd:
@@ -579,37 +584,60 @@ def probe(body):
         if kids:
             keys = parse_keys(key_raw_of(body), h)
             if not keys:
-                return False                      # encrypted, no usable key
+                return False, "encrypted, no usable key"
             candidates = [keys[k] for k in kids if k in keys]
             if not candidates:
-                return False                      # key does not match stream KID
+                return False, "key does not match stream KID"
 
-    saw_shaky = False
+    saw_shaky, last_note = False, ""
     for key in (candidates or [None]):
-        state = decode_test(url, h, key)
+        state, note = decode_test(url, h, key)
         if state == "ok":
-            return True
+            return True, "plays"
         if state == "shaky":
-            saw_shaky = True
-    return True if (saw_shaky and SHAKY_IS_OK) else False
+            saw_shaky, last_note = True, note
+        else:
+            last_note = note
+    if saw_shaky and SHAKY_IS_OK:
+        return True, "plays (warnings)"
+    return False, "decode failed: %s" % last_note
 
 
 _health_cache = {}
+_reason_cache = {}
+
+
+def _check(body):
+    if expired(body):
+        e = expiry(body)
+        return False, "token expired"
+    return probe(body)
 
 
 def health(body):
     k = tuple(body)
     if k not in _health_cache:
-        _health_cache[k] = False if expired(body) else probe(body)
+        _health_cache[k], _reason_cache[k] = _check(body)
     return _health_cache[k]
+
+
+def reason(body):
+    health(body)
+    return _reason_cache.get(tuple(body), "")
 
 
 def prefetch_health(bodies):
     """Check many entries in parallel so the run doesn't take hours."""
     todo = [b for b in {tuple(b) for b in bodies} if b not in _health_cache]
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        for b, res in zip(todo, ex.map(lambda b: False if expired(list(b)) else probe(list(b)), todo)):
-            _health_cache[b] = res
+        for b, (v, why) in zip(todo, ex.map(lambda b: _check(list(b)), todo)):
+            _health_cache[b], _reason_cache[b] = v, why
+    counts = {}
+    for b in {tuple(b) for b in bodies}:
+        key = "plays" if _health_cache.get(b) is True else (
+            "unverifiable" if _health_cache.get(b) is None else "dead")
+        counts[key] = counts.get(key, 0) + 1
+    print("my entries:", counts)
 
 
 def app_can_play(body):
@@ -703,8 +731,10 @@ def update(mine_text, source_texts):
             replaced += 1
             dirty = True
             print("replaced (%s match): %s" % (how, name))
+        elif state is None:
+            print("unverifiable, kept old link: %s  (%s)" % (name, reason(body)))
         else:
-            print("dead, no working replacement:", name)
+            print("dead, no working replacement: %s  (%s)" % (name, reason(body)))
 
     out = None
     if dirty:
@@ -717,7 +747,16 @@ def fetch(url):
     return urllib.request.urlopen(req, timeout=60).read().decode("utf-8", "ignore")
 
 
+def check_ffmpeg():
+    try:
+        subprocess.run([FFMPEG_PATH, "-version"], capture_output=True, timeout=15, check=True)
+    except Exception:
+        sys.exit("ffmpeg not found (%s). Install it first, e.g. 'sudo apt-get install -y ffmpeg' "
+                 "on the runner, or set FFMPEG_PATH." % FFMPEG_PATH)
+
+
 def main():
+    check_ffmpeg()
     texts = []
     for u in SOURCES:
         try:
