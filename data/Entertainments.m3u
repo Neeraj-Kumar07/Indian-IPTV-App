@@ -1182,7 +1182,14 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/smrbol/HLSPartner/index.m3u8
 #EXTINF:-1 tvg-id="3336" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/blyflx.png" group-title="Movies",NH BollyFlix
 https://jmp2.uk/stvp-IN46000140Q
 #EXTINF:-1 tvg-id="3338" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/blygld.png" group-title="Unknown",NH BollyGold | GmaxHub
-https://0dc330e6408b4c3b9ac31fd37b121368.mediatailor.ap-south-1.amazonaws.com/v1/master/d367f9b863a7a04827f71ecab4cbeeb11f78a827/nh-bollygold-airtel/playlist.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=0000:0000
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=__hdnea__=st=1791792004~exp=1791813604~acl=/*~hmac=7b3ecc0f2209e95df94f210e759250624495bf99fe142db6eac49853e16087ee
+#EXTHTTP:{"Cookie":"__hdnea__=st=1791792004~exp=1791813604~acl=/*~hmac=7b3ecc0f2209e95df94f210e759250624495bf99fe142db6eac49853e16087ee","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/blygld/HLSPartner/index.m3u8
 #EXTINF:-1 tvg-id="3343" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/blyrag.png" group-title="Unknown",NH BollyRaga | GmaxHub
 https://jmp2.uk/stvp-IN460001373
 #EXTINF:-1 tvg-id="3543" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/blywcm.png" group-title="Movies",Eros Universe Bollywood Cinema
@@ -2207,7 +2214,14 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Media9_MOB/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1791792004~exp=1791813604~acl=/*~hmac=7b3ecc0f2209e95df94f210e759250624495bf99fe142db6eac49853e16087ee","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Bharat_AtoZ_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1761" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aryan_TV_National.png" group-title="News",Aryan TV National
-https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=8ff8f6676cb950bfb903411768269efe:aaf776e8b8c4eb08293c05231490593f
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=__hdnea__=st=1791792004~exp=1791813604~acl=/*~hmac=7b3ecc0f2209e95df94f210e759250624495bf99fe142db6eac49853e16087ee
+#EXTHTTP:{"Cookie":"__hdnea__=st=1791792004~exp=1791813604~acl=/*~hmac=7b3ecc0f2209e95df94f210e759250624495bf99fe142db6eac49853e16087ee","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/Aryan_TV_National_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1594" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Samachar_24.png" group-title="News",Samachar 24
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
