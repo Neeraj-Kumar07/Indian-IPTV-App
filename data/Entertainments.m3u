@@ -1410,7 +1410,16 @@ https://jmp2.uk/stvp-IN46000140Q
 #EXTHTTP:{"Origin":"https://www.jiotv.com","Referer":"https://www.jiotv.com/","Cookie":"__hdnea__=st=1791811513~exp=1791833113~acl=/*~hmac=77d01788ad8389ed675b9739c2a2c9806d4baf1015d6de5ff20acb43b8e0167a"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/blygld/HLSPartner/index.m3u8?|cookie=__hdnea__=st=1791811513~exp=1791833113~acl=/*~hmac=77d01788ad8389ed675b9739c2a2c9806d4baf1015d6de5ff20acb43b8e0167a&referer=https://www.jiotv.com/&origin=https://www.jiotv.com&user-agent=Premium Plugx
 #EXTINF:-1 tvg-id="3343" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/blyrag.png" group-title="Unknown",NH BollyRaga | GmaxHub
-https://jmp2.uk/stvp-IN460001373
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=0000:0000
+#EXTVLCOPT:http-user-agent=Premium Plugx
+#EXTVLCOPT:http-referrer=https://www.jiotv.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.jiotv.com
+#EXTVLCOPT:http-cookie=__hdnea__=st=1791811513~exp=1791833113~acl=/*~hmac=77d01788ad8389ed675b9739c2a2c9806d4baf1015d6de5ff20acb43b8e0167a
+#EXTHTTP:{"Origin":"https://www.jiotv.com","Referer":"https://www.jiotv.com/","Cookie":"__hdnea__=st=1791811513~exp=1791833113~acl=/*~hmac=77d01788ad8389ed675b9739c2a2c9806d4baf1015d6de5ff20acb43b8e0167a"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/blyrag/HLSPartner/index.m3u8?|cookie=__hdnea__=st=1791811513~exp=1791833113~acl=/*~hmac=77d01788ad8389ed675b9739c2a2c9806d4baf1015d6de5ff20acb43b8e0167a&referer=https://www.jiotv.com/&origin=https://www.jiotv.com&user-agent=Premium Plugx
 #EXTINF:-1 tvg-id="3543" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/blywcm.png" group-title="Movies",Eros Universe Bollywood Cinema
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
