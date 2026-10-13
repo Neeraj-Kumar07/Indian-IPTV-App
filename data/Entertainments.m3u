@@ -47,7 +47,10 @@ https://d2o8pibksxtln6.cloudfront.net/live/media/ZEE_TV_HD/dash/ZEE_TV_HD.mpd
 #EXTVLCOPT:http-user-agent=com.graymatrix.did;Android TV;5.82.6(203230929);Android(10);Xiaomi(Redmi Note 8 Pro)
 https://premiumplug.fun/zee/zee5.php/0-9-zeetv.m3u8
 #EXTINF:-1 tvg-id="1351" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ZeeTV.png" group-title="Entertainment",Zee TV
-http://103.151.60.162:2122/play/a01u/index.m3u8?hls
+#KODIPROP:inputstream.adaptive.license_key={"keys":[{"kty":"oct","kid":"_WKo3sN9WwCS_IZ7cShC1Q","k":"CkM9nJD9eJkiLSK7ax-OJg"},{"kty":"oct","kid":"opE3VQ4jXRi-aOqglrutqw","k":"KnJuucylXqRMHe6nuwCiMQ"},{"kty":"oct","kid":"E1-iw9tnVqKoncCMAzaA7A","k":"XS7QyDF1kXk1SyFRossFZg"},{"kty":"oct","kid":"sTyZPHFLWPOccJEo2N3lTw","k":"bmOIP8i3-uTPVKIlGsPYwg"}],"type":"temporary"}
+#EXTVLCOPT:http-user-agent=JioTV.Plus/6.0.8 (Linux;Android 13) AndroidXMedia3/1.1.1
+#EXTHTTP:{"cookie":"__hdnea__=st=1791842114~exp=1791863714~acl=/bpk-tv/ZeeTV_BTS/WDVLive/*~hmac=71b5bcaeeabb125c0c4ca92bfdf801193f64163745146b7799c5852a25afccdf"}
+https://jiotvbpkstb.cdn.jio.com/bpk-tv/ZeeTV_BTS/WDVLive/index.mpd?__hdnea__=st=1791842114~exp=1791863714~acl=/bpk-tv/ZeeTV_BTS/WDVLive/*~hmac=71b5bcaeeabb125c0c4ca92bfdf801193f64163745146b7799c5852a25afccdf&xxx=%7Ccookie=__hdnea__%3Dst%3D1791842114~exp%3D1791863714~acl%3D%2Fbpk-tv%2FZeeTV_BTS%2FWDVLive%2F%2A~hmac%3D71b5bcaeeabb125c0c4ca92bfdf801193f64163745146b7799c5852a25afccdf
 #EXTINF:-1 tvg-id="291" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Sony_SD.png" group-title="Entertainment",SET
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
