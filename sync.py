@@ -817,6 +817,7 @@ SOURCES = [
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S2.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S1.m3u",
+    "https://raw.githubusercontent.com/amazeyourself/m3u/refs/heads/main/jtv.m3u",
 ]
 
 MINE = "data/Entertainments.m3u"
