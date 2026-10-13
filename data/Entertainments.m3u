@@ -2240,7 +2240,16 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Tar_TV_MOB/WDVLive/index.mpd?|cookie=__hd
 #EXTHTTP:{"Origin":"https://www.jiotv.com","Referer":"https://www.jiotv.com/","Cookie":"__hdnea__=st=1791860570~exp=1791882170~acl=/*~hmac=422fa1eab90a4c2fd8d1204cada17043a2b2df797e2fa85de92158b330be7791"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/National_News_MOB/WDVLive/index.mpd?|cookie=__hdnea__=st=1791860570~exp=1791882170~acl=/*~hmac=422fa1eab90a4c2fd8d1204cada17043a2b2df797e2fa85de92158b330be7791&referer=https://www.jiotv.com/&origin=https://www.jiotv.com&user-agent=Premium Plugx
 #EXTINF:-1 tvg-id="2954" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/TV45.png" group-title="News",TV45
-https://server.livelegitpro.in/bnews24/bnews24/video.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=c8f23b5ec73b51a698b08eb47de40138:cf909a8b891587e783331b7d30558863
+#EXTVLCOPT:http-user-agent=Premium Plugx
+#EXTVLCOPT:http-referrer=https://www.jiotv.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.jiotv.com
+#EXTVLCOPT:http-cookie=__hdnea__=st=1791860570~exp=1791882170~acl=/*~hmac=422fa1eab90a4c2fd8d1204cada17043a2b2df797e2fa85de92158b330be7791
+#EXTHTTP:{"Origin":"https://www.jiotv.com","Referer":"https://www.jiotv.com/","Cookie":"__hdnea__=st=1791860570~exp=1791882170~acl=/*~hmac=422fa1eab90a4c2fd8d1204cada17043a2b2df797e2fa85de92158b330be7791"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/TV45_MOB/WDVLive/index.mpd?|cookie=__hdnea__=st=1791860570~exp=1791882170~acl=/*~hmac=422fa1eab90a4c2fd8d1204cada17043a2b2df797e2fa85de92158b330be7791&referer=https://www.jiotv.com/&origin=https://www.jiotv.com&user-agent=Premium Plugx
 #EXTINF:-1 tvg-id="2957" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Public_First.png" group-title="News",Public First
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
