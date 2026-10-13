@@ -13,12 +13,17 @@ https://dknttpxmr0dwf.cloudfront.net/index_57.m3u8
 http://premiumplug.fun/zee/zee5.php/0-9-zeebiharjharkhand.m3u8
 #EXTINF:-1 tvg-id="235" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/India_TV.png" group-title="News",India TV
 https://pl-indiatvnews.akamaized.net/out/v1/db79179b608641ceaa5a4d0dd0dca8da/index.m3u8
+
+
 #EXTINF:-1 tvg-id="1132" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Plus_HD.png" group-title="Entertainment",Star Plus HD
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #EXTVLCOPT:http-user-agent=GmaxHub
-#EXTHTTP:{"Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+#EXTVLCOPT:http-cookie=__hdnea__=st=1791853516~exp=1791875116~acl=/bpk-tv/Star_Plus_HD_BTS/WDVLive/*~hmac=6c50203731e88d112f93d396ef99869f89848003ac16799c5d8b97a1e7383edf
+#EXTHTTP:{"Cookie":"__hdnea__=st=1791853516~exp=1791875116~acl=/bpk-tv/Star_Plus_HD_BTS/WDVLive/*~hmac=6c50203731e88d112f93d396ef99869f89848003ac16799c5d8b97a1e7383edf","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Plus_HD_BTS/WDVLive/index.mpd
+
+
 #EXTINF:-1 tvg-id="1116" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Plus.png" group-title="Entertainment",Star Plus
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
