@@ -20,7 +20,7 @@ from sync import attr, display_name, norm_name, parse, url_of, app_can_play, MIN
 # ------------------------------------------------------------
 # SETTINGS
 # ------------------------------------------------------------
-FORCE_SOURCE = ""        # <- put your ONE source playlist raw URL here
+FORCE_SOURCE = "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u"        # <- put your ONE source playlist raw URL here
 
 ONLY_CLEARKEY = True     # skip source links the app cannot play (Widevine/PlayReady)
 REPLACE_EXTINF = False   # False: keep my #EXTINF line (name, logo, group) and replace only
@@ -60,13 +60,24 @@ def build_source_index(text):
 
 
 def find_candidates(extinf, by_tvg, by_name):
-    """tvg-name first, then channel name. Returns ((how, key), candidates)."""
-    k = tvg_key(extinf)
-    if k and k in by_tvg:
-        return ("tvg-name", k), by_tvg[k]
-    k = norm_name(extinf)
-    if k and k in by_name:
-        return ("name", k), by_name[k]
+    """Try the matches in this order and stop at the first hit:
+       1. my tvg-name        = source tvg-name
+       2. my channel name    = source channel name        (what sync.py does)
+       3. my channel name    = source tvg-name            (my file has no tvg-name, and the
+                                                           source's visible name is broken,
+                                                           e.g. "w_450 | Gmax")
+       4. my tvg-name        = source channel name
+    Returns (how, candidates)."""
+    mine_tvg, mine_name = tvg_key(extinf), norm_name(extinf)
+    tries = (
+        ("tvg-name", mine_tvg, by_tvg),
+        ("name", mine_name, by_name),
+        ("name vs source tvg-name", mine_name, by_tvg),
+        ("tvg-name vs source name", mine_tvg, by_name),
+    )
+    for how, key, index in tries:
+        if key and key in index:
+            return how, index[key]
     return None, []
 
 
@@ -74,7 +85,7 @@ def force_update(mine_text, source_text):
     by_tvg, by_name = build_source_index(source_text)
     head, mine = parse(mine_text)
 
-    used = {}            # (how, key) -> how many of my copies already got a source link
+    used = {}            # id(candidate list) -> how many of my copies already got a link from it
     updated, unchanged, no_match, no_spare, dirty = 0, 0, 0, 0, False
 
     for block in mine:
@@ -85,8 +96,8 @@ def force_update(mine_text, source_text):
             no_match += 1
             continue
 
-        i = used.get(group, 0)
-        used[group] = i + 1
+        i = used.get(id(cands), 0)
+        used[id(cands)] = i + 1
         if i >= len(cands):
             # more copies of this channel in my file than links in the source;
             # leave the extra copies alone so backups stay distinct
@@ -103,7 +114,7 @@ def force_update(mine_text, source_text):
             block[0] = new_extinf
         updated += 1
         dirty = True
-        print("updated [%s] (copy #%d): %s" % (group[0], i + 1, name))
+        print("updated [%s] (copy #%d): %s" % (group, i + 1, name))
 
     out = None
     if dirty:
