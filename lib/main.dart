@@ -43,8 +43,10 @@ class M3UPlayer extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Live TV'),
+
         ),
         body: const Home(),
+
       ),
     );
   }
