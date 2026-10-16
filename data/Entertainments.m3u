@@ -668,7 +668,14 @@ https://onekey.virey40690.workers.dev/mpd/585
 #EXTHTTP:{"cookie": "__hdnea__=st=1792099811~exp=1792121411~acl=/*~hmac=ae966b8837fa4b534d9271733296d5a8a0d0d472f2521880b040b4c462d7a899", "Origin": "https://www.jiotv.com/", "Referer": "https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeZing_BTS/WDVLive/index.mpd?__hdnea__=st=1792106048~exp=1792109648~acl=/bpk-tv/ZeeZing_BTS/WDVLive/*~hmac=ee0d1471d381f3c77b868b2e01797d19188e65422a74e2d723e377dd3f091662
 #EXTINF:-1 tvg-id="587" tvg-chno="464" tvg-logo="https://dtil.tmsimg.com/assets/s77447_ld_h15_aa.png?lock=720x540" group-title="Music",9XM
-http://14.96.244.82:5001/live/587.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=null:null
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=__hdnea__=st=1792099811~exp=1792121411~acl=/*~hmac=ae966b8837fa4b534d9271733296d5a8a0d0d472f2521880b040b4c462d7a899
+#EXTHTTP:{"Cookie":"__hdnea__=st=1792099811~exp=1792121411~acl=/*~hmac=ae966b8837fa4b534d9271733296d5a8a0d0d472f2521880b040b4c462d7a899","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/9xm/HLSPartner/index.m3u8
 #EXTINF:-1 tvg-id="587" tvg-logo="https://dtil.tmsimg.com/assets/s77447_ld_h15_aa.png?lock=720x540" group-title="Music",9XM
 https://d2o8pibksxtln6.cloudfront.net/live/media/9XM/hls_fta/9XM.m3u8
 #EXTINF:-1 tvg-id="1108" tvg-logo="https://img.media.jio.com/tvpimages/5/6/301982_1749665314605_l_medium.jpg" group-title="Sports",Star Sports 1 HD Hindi
