@@ -53,6 +53,9 @@
       "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S2.m3u",
       "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S1.m3u",
       "https://raw.githubusercontent.com/amazeyourself/m3u/refs/heads/main/jtv.m3u",
+      "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/zio.m3u",
+      "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/tstar.m3u",
+      "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/Combined.m3u",
   ]
 
   MINE = "data/Entertainments.m3u"
