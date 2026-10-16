@@ -28,7 +28,7 @@ jobs:
 
       # 1) Build the merged pool from all source links
       - name: Merge sources
-        run: python3 merge_sources.py
+        run: python3 merge_all.py
 
       # 2) Publish the pool so the raw GitHub URL serves the new version
       - name: Publish merged pool
