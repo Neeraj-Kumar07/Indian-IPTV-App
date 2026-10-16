@@ -1,4 +1,4 @@
-# """
+ """
   Keeps data/Entertainments.m3u working.
 
   For every channel in Entertainments.m3u:
