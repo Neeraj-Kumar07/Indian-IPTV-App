@@ -2,42 +2,11 @@
 
 #////////////////////////////////////////////////////////////////////////
 #
-#name: sync-channels
-#
-#on:
-#  schedule:
-#    - cron: "7,37 * * * *"   # every hour (Jio tokens last only ~6 hours)
-#  workflow_dispatch:
-#
-#permissions:
-#  contents: write
-#
-#concurrency:
-#  group: sync-channels
-#  cancel-in-progress: false
-#
-#jobs:
-#  sync:
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 15
-#    steps:
-#      - uses: actions/checkout@v5
-#
-#      - run: python3 sync.py
-#
-#      - run: |
-#          git config user.name "bot"
-#          git config user.email "bot@users.noreply.github.com"
-#          git add data/Entertainments.m3u
-#          git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
-
-
-#////////////////////////////////////////////////////////////////////
 name: sync-channels
 
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "7,37 * * * *"   # every hour (Jio tokens last only ~6 hours)
   workflow_dispatch:
 
 permissions:
@@ -50,26 +19,57 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
 
-      - run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-          pip install requests
-
-      # 1) replace dead links (checks each link first)
       - run: python3 sync.py
-        env:
-          MAX_WORKERS: "8"
 
-      # 2) overwrite link details for channels found in the source (no checking)
-      - run: python3 sync2.py
-
-      # 3) one commit and one push for both scripts
       - run: |
           git config user.name "bot"
           git config user.email "bot@users.noreply.github.com"
           git add data/Entertainments.m3u
           git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
+
+
+#////////////////////////////////////////////////////////////////////
+#name: sync-channels
+#
+#on:
+#  schedule:
+#    - cron: "7 * * * *"
+#  workflow_dispatch:
+#
+#permissions:
+#  contents: write
+#
+#concurrency:
+#  group: sync-channels
+#  cancel-in-progress: false
+#
+#jobs:
+#  sync:
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 45
+#    steps:
+#      - uses: actions/checkout@v5
+#
+#      - run: |
+#          sudo apt-get update
+#          sudo apt-get install -y ffmpeg
+#          pip install requests
+#
+#      # 1) replace dead links (checks each link first)
+#      - run: python3 sync.py
+#        env:
+#          MAX_WORKERS: "8"
+#
+#      # 2) overwrite link details for channels found in the source (no checking)
+#      - run: python3 sync2.py
+#
+#      # 3) one commit and one push for both scripts
+#      - run: |
+#          git config user.name "bot"
+#          git config user.email "bot@users.noreply.github.com"
+#          git add data/Entertainments.m3u
+#          git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
