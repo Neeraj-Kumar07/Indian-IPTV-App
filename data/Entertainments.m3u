@@ -972,9 +972,7 @@ https://d1msejlow1t3l4.cloudfront.net/fta/dishatv/playlist.m3u8
 #EXTINF:-1 tvg-id="939" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Bhaktisagar.png" group-title="Devotional",Bhakti Sagar TV
 http://14.96.244.82:5001/live/939.m3u8
 #EXTINF:-1 tvg-id="1554" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/sanatan.png" group-title="Devotional",Sanatan TV
-#EXTHTTP:{"cookie": "__hdnea__=st=1792119608~exp=1792141208~acl=/*~hmac=c82b18639c00458ba923fa59ccc11da3a1c0f6ad89fafff826b9cde945fb55a4"}
-#EXTVLCOPT:http-user-agent=GmaxHub
-https://jiotvmblive.cdn.jio.com/bpk-tv/sanatan/HLSPartner/index.m3u8
+http://14.96.244.82:5001/live/1554.m3u8
 #EXTINF:-1 tvg-id="597" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Satsang_TV.png" group-title="Devotional",Satsang TV
 https://d2vfwvjxwtwq1t.cloudfront.net/out/v1/6b24239d5517495b986e7705490c6e65/index.m3u8
 #EXTINF:-1 tvg-id="611" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Darshan_24.png" group-title="Devotional",Darshan 24
@@ -1263,7 +1261,14 @@ http://14.96.244.82:5001/live/536.m3u8
 #EXTINF:-1 tvg-id="538" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_Rajasthan_Jaipur.png" group-title="Entertainment",DD Rajasthan (Jaipur)
 https://cdn.pishow.tv/ott/live/34/master.m3u8
 #EXTINF:-1 tvg-id="539" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_Bihar.png" group-title="Entertainment",DD Bihar
-http://14.96.244.82:5001/live/539.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=d5530633810a5dfa9500cbe5131bf52d:71ce30bd40e97ad61a0db640ce2d72e9
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5
+#EXTVLCOPT:http-referrer=https://www.jiotv.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.jiotv.com
+#EXTVLCOPT:http-cookie=__hdnea__=st=1792123210~exp=1792144810~acl=/*~hmac=c8691f55882bcdc90f5ecc3bc1487140737a38dc7b638eb52e54dbd40ef2a8ee
+#EXTHTTP:{"Cookie":"__hdnea__=st=1792123210~exp=1792144810~acl=/*~hmac=c8691f55882bcdc90f5ecc3bc1487140737a38dc7b638eb52e54dbd40ef2a8ee","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/DD_Bihar_MOB/WDVLive/index.mpd?__hdnea__=st=1791964811~exp=1791986411~acl=/*~hmac=e189c4ac1a9fc36d9adb6d2b44087de05de624ae12a8a66eb01bcedcccb6a6c6&__hdnea__=st=1792123210~exp=1792144810~acl=/*~hmac=c8691f55882bcdc90f5ecc3bc1487140737a38dc7b638eb52e54dbd40ef2a8ee
 #EXTINF:-1 tvg-id="540" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_Uttar_Pradesh.png" group-title="Entertainment",DD Uttar Pradesh
 https://cdn.pishow.tv/ott/live/36/master.m3u8
 #EXTINF:-1 tvg-id="1329" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_Gyandarshan.png" group-title="Entertainment",DD Gyandarshan
