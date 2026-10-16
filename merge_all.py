@@ -16,7 +16,10 @@ import time
 import urllib.request
 
 SOURCES = [
+
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
+    "https://raw.githubusercontent.com/sportlive18/Sonyliv-Playlist-Autoupdate/refs/heads/main/sony.m3u",
+
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S10.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
@@ -33,7 +36,13 @@ SOURCES = [
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S2.m3u",
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S1.m3u",
-    "https://raw.githubusercontent.com/amazeyourself/m3u/refs/heads/main/jtv.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Pocket_TV.m3u",
+    "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
+    "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/Combined.m3u",
+    "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/tstar.m3u",
+    "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/zio.m3u",
+    "https://raw.githubusercontent.com/sportlive18/All-Playlist/refs/heads/main/Combined.m3u",
+    "https://raw.githubusercontent.com/sportlive18/Sportlink-wtf/refs/heads/main/Sports.m3u",
 ]
 # NOTE: your own data/Entertainments.m3u is intentionally NOT in this list.
 
