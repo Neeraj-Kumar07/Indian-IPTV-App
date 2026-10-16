@@ -566,32 +566,6 @@ if __name__ == "__main__":
 
 
 
-  SOURCES = [
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S10.m3u",
-      "https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/Entertainments.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S1.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S11.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S2.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S3.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S4.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S5.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S6.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S7.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S8.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S9.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S2.m3u",
-      "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S1.m3u",
-      "https://raw.githubusercontent.com/amazeyourself/m3u/refs/heads/main/jtv.m3u",
-      "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/zio.m3u",
-      "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/tstar.m3u",
-      "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/Combined.m3u",
-  ]
-
-  MINE = "data/Entertainments.m3u"
 
 
 #
