@@ -645,6 +645,9 @@ DECODE_SECONDS = 4          # how much video to really decode
 FFMPEG_TIMEOUT = 15         # seconds to wait on network inside ffmpeg
 MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "6"))   # parallel health checks
 SHAKY_IS_OK = True          # decoded but printed startup warnings -> count as working
+# ADDED 2026-10-17 13:53 UTC: when True, a dead entry may copy the link details of ANOTHER entry for the same
+# channel that is already in my own file and works (e.g. two "Star Plus" entries, one dead, one working).
+COPY_FROM_SIBLINGS = True
 NULL_OUT = "NUL" if os.name == "nt" else "/dev/null"
 
 SRC_OF = {}                 # tuple(body) -> source labels that contain this entry
@@ -1071,11 +1074,20 @@ def update(mine_text, source_texts):
             still_dead.append(name)
             continue
 
-        fresh = [c for c in cands
-                 if c[1] != body and tuple(c[1]) not in taken[nkey] and usable(c[1])]
+        # CHANGED 2026-10-17 13:53 UTC: "taken" used to block every link already present in my file for this
+        # channel, so a dead "Star Plus" could never copy the working "Star Plus" from the same file.
+        # Distinct links are still preferred; links used by another entry are kept as "siblings".
+        # fresh = [c for c in cands
+        #          if c[1] != body and tuple(c[1]) not in taken[nkey] and usable(c[1])]
+        fresh_all = [c for c in cands if c[1] != body and usable(c[1])]
+        fresh = [c for c in fresh_all if tuple(c[1]) not in taken[nkey]]
+        siblings = [c for c in fresh_all if tuple(c[1]) in taken[nkey]] if COPY_FROM_SIBLINGS else []
 
         # 1) a candidate that is verified working
         working = [c for c in fresh if health(c[1]) is True]
+        if not working:
+            # ADDED 2026-10-17 13:53 UTC: no distinct working link -> copy one that already works in my own file
+            working = [c for c in siblings if health(c[1]) is True]
         best, kind = None, ""
         if working:
             best, kind = best_of(working), "verified"
@@ -1097,6 +1109,16 @@ def update(mine_text, source_texts):
                 if newer:
                     best = max(newer, key=lambda c: issued(c[1]))
                     kind = "NEWER TOKEN (unverified)"
+
+        # ADDED 2026-10-17 13:53 UTC: my link is unverifiable here AND has no key and no token (a bare Jio link
+        # cannot be decrypted by the app), while another entry for the same channel in my file has a
+        # key and a still-valid token (e.g. the Hotstar "Star Plus") -> copy its details (unverified).
+        if best is None and COPY_FROM_SIBLINGS and state is None \
+                and expiry(body) is None and not key_raw_of(body):
+            sib = [c for c in siblings
+                   if health(c[1]) is None and key_raw_of(c[1]) and expiry(c[1]) is not None]
+            if sib:
+                best, kind = best_of(sib), "COPIED from keyed entry already in my file (unverified)"
 
         if best:
             new = best[1]
