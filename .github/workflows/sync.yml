@@ -37,7 +37,7 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add data/TestTypes.m3u
           git diff --cached --quiet || (git commit -m "update merged pool" && git pull --rebase && git push)
-          sleep 60
+          
 
       # 3) Fix my playlist using the pool (read from the raw URL)
       - name: Sync
