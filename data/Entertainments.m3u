@@ -1177,7 +1177,14 @@ http://14.96.244.82:5001/live/915.m3u8
 #EXTINF:-1 tvg-id="918" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Bharat_Samachar.png" group-title="News",Bharat Samachar
 https://mumt03.tangotv.in/Dsly5z3HBHARATSAMACHAR/index.m3u8
 #EXTINF:-1 tvg-id="921" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Prime_News.png" group-title="News",Prime News
-http://14.96.244.82:5001/live/921.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=c639fb6131dd51308979bb430766b496:a5385ddcb6e0e69aeac8fe6dbc882006
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=__hdnea__=st=1792209616~exp=1792231216~acl=/*~hmac=dd36e26c217ca96fe010444efb1abae4ac99a10eab60bf1d336336b91afd7324
+#EXTHTTP:{"Cookie":"__hdnea__=st=1792209616~exp=1792231216~acl=/*~hmac=dd36e26c217ca96fe010444efb1abae4ac99a10eab60bf1d336336b91afd7324","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/Prime_News_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="927" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/First_India_News.png" group-title="News",First India News
 https://mumt03.tangotv.in/Dsly5z3H1STINDIANEWS/index.m3u8
 #EXTINF:-1 tvg-id="936" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News_1_India.png" group-title="News",News 1 India
@@ -1610,8 +1617,8 @@ https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_HD2_BTS/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=68318f7c97c55ba6ab8d0398a88fed3e:d312fb3325b4eb9462b4a0d2b6794adf
 #EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1792186203~exp=1792207803~acl=/*~hmac=544a2f7202ed5352b22808bb59b03f2a8ff61f6d2af6dc51192635c9554e08bb
-#EXTHTTP:{"Cookie":"__hdnea__=st=1792186203~exp=1792207803~acl=/*~hmac=544a2f7202ed5352b22808bb59b03f2a8ff61f6d2af6dc51192635c9554e08bb","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+#EXTVLCOPT:http-cookie=__hdnea__=st=1792209616~exp=1792231216~acl=/*~hmac=dd36e26c217ca96fe010444efb1abae4ac99a10eab60bf1d336336b91afd7324
+#EXTHTTP:{"Cookie":"__hdnea__=st=1792209616~exp=1792231216~acl=/*~hmac=dd36e26c217ca96fe010444efb1abae4ac99a10eab60bf1d336336b91afd7324","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_3_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="514" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Ten_1.png" group-title="Sports",Sony Ten 1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36
