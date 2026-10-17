@@ -1,574 +1,4 @@
-#
-# """
-# Keeps data/Entertainments.m3u working.
-#
-# For every channel in Entertainments.m3u:
-# 1. test my link. Working -> keep it exactly as it is.
-# 2. Dead/expired -> search the matching channel in ALL source playlists and test
-#    every candidate link until a verified working one is found. Matching order:
-#      1. my tvg-name     == source tvg-name
-#      2. my display name == source display name
-#      3. my display name == source tvg-name
-#      4. my tvg-name     == source display name
-#      5. same tvg-id (only if the name is similar AND the quality tag matches)
-#    HD and non-HD are different channels: "DD National" only gets "DD National"
-#    links, "DD National HD" only gets "DD National HD" links.
-# 3. No verified working link anywhere AND my link is confirmed dead ->
-#    automatically take the best UNVERIFIED link (HTTP 401/403/451 on this machine,
-#    best match first, then newest token expiry).
-#    If my own link is only "unverifiable" (not confirmed dead) -> keep it untouched.
-#
-# Run on a machine in India with ffmpeg installed.
-# """
-# import base64
-# import difflib
-# import json
-# import os
-# import re
-# import shutil
-# import subprocess
-# import sys
-# import time
-# import urllib.request
-# from concurrent.futures import ThreadPoolExecutor
-#
-# import requests
-#
-# SOURCES = [
-# "https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/TestTypes.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S10.m3u",
-#     "https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/Entertainments.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S1.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S11.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S2.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S3.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S4.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S5.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S6.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S7.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S8.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S9.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S3.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S2.m3u",
-# #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/Sport_S1.m3u",
-# # #     "https://raw.githubusercontent.com/amazeyourself/m3u/refs/heads/main/jtv.m3u",
-# #     "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/zio.m3u",
-# #           "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/tstar.m3u",
-# #           "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/Combined.m3u",
-# ]
-#
-# MINE = "data/Entertainments.m3u"
-#
-# EXPIRY_MARGIN = 600         # treat a token as dead 10 min before its exp= time
-# ADD_MISSING_TVG_ID = True   # copy tvg-id from the source into my entries that lack one
-# UA = "Mozilla/5.0"
-#
-# FFMPEG_PATH = os.environ.get("FFMPEG_PATH") or shutil.which("ffmpeg") or "ffmpeg"
-# DECODE_SECONDS = 4          # how much video to really decode
-# FFMPEG_TIMEOUT = 15         # seconds to wait on network inside ffmpeg
-# MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "6"))   # parallel health checks
-# SHAKY_IS_OK = True          # decoded but printed startup warnings -> count as working
-# NULL_OUT = "NUL" if os.name == "nt" else "/dev/null"
-#
-# SRC_OF = {}                 # tuple(body) -> source labels that contain this entry
-#
-#
-# # ------------------------------------------------------------
-# # M3U helpers
-# # ------------------------------------------------------------
-#
-# def attr(extinf, name):
-#     m = re.search(r'%s="([^"]*)"' % re.escape(name), extinf)
-#     if m and m.group(1).strip():
-#         return m.group(1).strip()
-#     return None
-#
-#
-# def display_name(extinf):
-#     q = extinf.rfind('"')
-#     i = extinf.find(",", q if q != -1 else 0)
-#     return extinf[i + 1:].strip() if i != -1 else ""
-#
-#
-# def norm_text(t):
-#     t = (t or "").lower()
-#     t = re.sub(r"\|.*$", "", t)        # drop "| GmaxHub" style suffix
-#     t = re.sub(r"\(.*?\)", "", t)      # drop "(1080p)" style suffix
-#     return re.sub(r"[^a-z0-9]+", "", t)
-#
-#
-# def norm_name(extinf):
-#     return norm_text(display_name(extinf))
-#
-#
-# def norm_tvgname(extinf):
-#     return norm_text(attr(extinf, "tvg-name"))
-#
-#
-# def quality_tag(extinf):
-#     """'' for normal/SD channels, else 'hd', 'fhd', 'uhd' or '4k'. HD != non-HD."""
-#     t = display_name(extinf).lower()
-#     t = re.sub(r"\|.*$", "", t)
-#     t = re.sub(r"\(.*?\)", "", t)
-#     tags = re.findall(r"\b(4k|uhd|fhd|hd|sd)\b", t)
-#     tag = tags[-1] if tags else ""
-#     return "" if tag == "sd" else tag
-#
-#
-# def add_tvg_id(extinf, tid):
-#     if attr(extinf, "tvg-id"):
-#         return extinf
-#     return re.sub(r"^(#EXTINF:-?\d+)", lambda m: '%s tvg-id="%s"' % (m.group(1), tid),
-#                   extinf, count=1)
-#
-#
-# def parse(text):
-#     head, blocks = [], []
-#     for line in text.splitlines():
-#         if line.startswith("#EXTINF"):
-#             blocks.append([line, []])
-#         elif blocks:
-#             if line.strip():
-#                 blocks[-1][1].append(line)
-#         else:
-#             head.append(line)
-#     return head, blocks
-#
-#
-# def url_of(body):
-#     return next((l for l in reversed(body) if not l.startswith("#")), None)
-#
-#
-# def src_of(body):
-#     return ", ".join(SRC_OF.get(tuple(body), ["?"])[:3])
-#
-#
-# # ------------------------------------------------------------
-# # Health check: working (True), dead (False), can't verify (None)
-# # ------------------------------------------------------------
-#
-# def headers_of(body):
-#     h = {"User-Agent": UA}
-#     for l in body:
-#         low = l.lower()
-#         val = l.split("=", 1)[1].strip() if "=" in l else ""
-#         if low.startswith("#extvlcopt:http-user-agent="):
-#             h["User-Agent"] = val
-#         elif low.startswith(("#extvlcopt:http-referrer=", "#extvlcopt:http-referer=")):
-#             h["Referer"] = val
-#         elif low.startswith("#extvlcopt:http-origin="):
-#             h["Origin"] = val
-#         elif low.startswith("#extvlcopt:http-cookie="):
-#             h["Cookie"] = val
-#         elif low.startswith("#extvlcopt:http-extra-headers="):
-#             k, _, v = val.partition(":")
-#             if k.strip() and v.strip():
-#                 h[k.strip()] = v.strip()
-#         elif low.startswith("#exthttp:"):
-#             try:
-#                 data = json.loads(l.split(":", 1)[1])
-#                 if isinstance(data, dict):
-#                     for k, v in data.items():
-#                         k = {"cookie": "Cookie", "origin": "Origin", "referer": "Referer",
-#                              "user-agent": "User-Agent"}.get(str(k).lower(), str(k))
-#                         h[k] = str(v)
-#             except Exception:
-#                 pass
-#     return h
-#
-#
-# def key_raw_of(body):
-#     for l in body:
-#         if l.lower().startswith("#kodiprop:inputstream.adaptive.license_key="):
-#             return l.split("=", 1)[1].strip()
-#     return None
-#
-#
-# def expiry(body):
-#     text = "\n".join(l for l in body if not l.lower().startswith("#kodiprop"))
-#     m = re.search(r"exp=(\d{9,11})", text)
-#     return int(m.group(1)) if m else None
-#
-#
-# def expired(body):
-#     e = expiry(body)
-#     return e is not None and e < time.time() + EXPIRY_MARGIN
-#
-#
-# def b64_to_hex(s):
-#     s = s.replace("-", "+").replace("_", "/")
-#     s += "=" * (-len(s) % 4)
-#     return base64.b64decode(s).hex()
-#
-#
-# def parse_keys(raw, headers):
-#     """Returns {kid_hex: key_hex}. Handles kid:key[,kid:key], JWK json, and key URLs."""
-#     keys = {}
-#     if not raw:
-#         return keys
-#     raw = raw.strip()
-#     if raw.lower().startswith("http"):
-#         try:
-#             raw = requests.get(raw, headers=headers, timeout=8).text.strip()
-#         except Exception:
-#             return keys
-#     if raw.startswith("{"):
-#         try:
-#             for k in json.loads(raw).get("keys", []):
-#                 keys[b64_to_hex(k["kid"])] = b64_to_hex(k["k"])
-#         except Exception:
-#             pass
-#         return keys
-#     for pair in raw.split(","):
-#         if ":" in pair:
-#             kid, key = pair.strip().split(":", 1)
-#             if re.fullmatch(r"[0-9a-fA-F]{32}", kid) and re.fullmatch(r"[0-9a-fA-F]{32}", key):
-#                 keys[kid.lower()] = key.lower()
-#     return keys
-#
-#
-# def decode_test(url, headers, key):
-#     """Really decode a few seconds of video. Returns (state, note); state = ok | shaky | fail."""
-#     hdrs = dict(headers)
-#     ua = hdrs.pop("User-Agent", UA)
-#     hdr_str = "".join("%s: %s\r\n" % (k, v) for k, v in hdrs.items())
-#
-#     cmd = [FFMPEG_PATH, "-nostdin", "-v", "error", "-user_agent", ua]
-#     if hdr_str:
-#         cmd += ["-headers", hdr_str]
-#     if key:
-#         cmd += ["-cenc_decryption_key", key]
-#     cmd += ["-rw_timeout", str(FFMPEG_TIMEOUT * 1_000_000),
-#             "-i", url, "-map", "0:v:0", "-t", str(DECODE_SECONDS), "-f", "null", NULL_OUT]
-#     try:
-#         r = subprocess.run(cmd, capture_output=True, text=True,
-#                            timeout=FFMPEG_TIMEOUT + DECODE_SECONDS + 25)
-#     except FileNotFoundError:
-#         return "fail", "ffmpeg not found"
-#     except Exception as e:
-#         return "fail", "ffmpeg error: %s" % str(e)[:60]
-#     err = (r.stderr or "").strip().splitlines()
-#     last = err[-1][:80] if err else ""
-#     if r.returncode != 0:
-#         return "fail", last or "ffmpeg exit %d" % r.returncode
-#     return ("shaky", last) if err else ("ok", "")
-#
-#
-# def probe(body):
-#     """Returns (state, reason). state: True working, False dead, None can't verify."""
-#     url = url_of(body)
-#     if not url:
-#         return False, "no url"
-#     url = url.split("|")[0].strip()
-#     if url.endswith("?"):
-#         url = url[:-1]
-#     h = headers_of(body)
-#
-#     # one retry, so a single slow response doesn't mark a good link dead
-#     status, text, err = None, "", ""
-#     for _ in range(2):
-#         try:
-#             r = requests.get(url, headers=h, timeout=10, stream=True)
-#             status = r.status_code
-#             text = next(r.iter_content(chunk_size=262144), b"").decode("utf-8", "ignore")
-#             r.close()
-#             break
-#         except Exception as e:
-#             err = str(e)[:60]
-#     if status is None:
-#         return False, "request failed: %s" % err
-#     if status in (401, 403, 451):
-#         return None, "HTTP %d (blocked for this server)" % status
-#     if status != 200:
-#         return False, "HTTP %d" % status
-#
-#     is_mpd = "<mpd" in text.lower()
-#     looks_manifest = ".mpd" in url.lower() or ".m3u8" in url.lower()
-#     if looks_manifest and not is_mpd and "#EXTM3U" not in text:
-#         return False, "HTTP 200 but not a manifest"
-#
-#     candidates = []
-#     if is_mpd:
-#         kids = {k.replace("-", "").lower()
-#                 for k in re.findall(r'default_KID="([0-9a-fA-F-]+)"', text, re.I)}
-#         if kids:
-#             keys = parse_keys(key_raw_of(body), h)
-#             if not keys:
-#                 return False, "encrypted, no usable key"
-#             candidates = [keys[k] for k in kids if k in keys]
-#             if not candidates:
-#                 return False, "key does not match stream KID"
-#
-#     saw_shaky, last_note = False, ""
-#     for key in (candidates or [None]):
-#         state, note = decode_test(url, h, key)
-#         if state == "ok":
-#             return True, "plays"
-#         if state == "shaky":
-#             saw_shaky, last_note = True, note
-#         else:
-#             last_note = note
-#     if saw_shaky and SHAKY_IS_OK:
-#         return True, "plays (warnings)"
-#     return False, "decode failed: %s" % last_note
-#
-#
-# _health_cache = {}
-# _reason_cache = {}
-#
-#
-# def _check(body):
-#     if expired(body):
-#         return False, "token expired"
-#     return probe(body)
-#
-#
-# def health(body):
-#     k = tuple(body)
-#     if k not in _health_cache:
-#         _health_cache[k], _reason_cache[k] = _check(body)
-#     return _health_cache[k]
-#
-#
-# def reason(body):
-#     health(body)
-#     return _reason_cache.get(tuple(body), "")
-#
-#
-# def prefetch_health(bodies, label):
-#     """Check many entries in parallel."""
-#     todo = [b for b in {tuple(b) for b in bodies} if b not in _health_cache]
-#     if todo:
-#         with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-#             for b, (v, why) in zip(todo, ex.map(lambda b: _check(list(b)), todo)):
-#                 _health_cache[b], _reason_cache[b] = v, why
-#     uniq = {tuple(b) for b in bodies}
-#     ok = sum(1 for b in uniq if _health_cache.get(b) is True)
-#     unv = sum(1 for b in uniq if _health_cache.get(b) is None)
-#     print("%s: %d working, %d dead, %d unverifiable (of %d)"
-#           % (label, ok, len(uniq) - ok - unv, unv, len(uniq)))
-#
-#
-# def app_can_play(body):
-#     """The app only supports ClearKey DRM (or no DRM). Skip Widevine/PlayReady."""
-#     for l in body:
-#         if l.lower().startswith("#kodiprop:inputstream.adaptive.license_type="):
-#             if "clearkey" not in l.lower():
-#                 return False
-#     return True
-#
-#
-# # ------------------------------------------------------------
-# # Matching: ALL sources, ALL candidates
-# # ------------------------------------------------------------
-#
-# def build_index(source_texts):
-#     by_id, by_tvg, by_name = {}, {}, {}
-#     for label, text in source_texts:
-#         _, blocks = parse(text)
-#         for extinf, body in blocks:
-#             if not url_of(body):
-#                 continue
-#             labels = SRC_OF.setdefault(tuple(body), [])
-#             if label not in labels:
-#                 labels.append(label)
-#             entries = []
-#             tid = attr(extinf, "tvg-id")
-#             if tid:
-#                 entries.append(by_id.setdefault(tid.lower(), []))
-#             tk = norm_tvgname(extinf)
-#             if tk:
-#                 entries.append(by_tvg.setdefault(tk, []))
-#             nk = norm_name(extinf)
-#             if nk:
-#                 entries.append(by_name.setdefault(nk, []))
-#             for lst in entries:
-#                 if all(b != body for _, b in lst):
-#                     lst.append((extinf, body))
-#     return by_id, by_tvg, by_name
-#
-#
-# def find_candidates(extinf, by_id, by_tvg, by_name):
-#     """Every entry for this channel from every source, tagged with a rank (0 = best match).
-#     Returns ([(src_extinf, body, rank, how)], how_of_best)."""
-#     nk, tk, tid = norm_name(extinf), norm_tvgname(extinf), attr(extinf, "tvg-id")
-#     out, seen = [], set()
-#
-#     def add(lst, rank, how):
-#         for e, b in lst:
-#             if tuple(b) not in seen:
-#                 seen.add(tuple(b))
-#                 out.append((e, b, rank, how))
-#
-#     if tk:
-#         add(by_tvg.get(tk, []), 0, "tvg-name=tvg-name")
-#     if nk:
-#         add(by_name.get(nk, []), 1, "name=name")
-#         add(by_tvg.get(nk, []), 2, "name=tvg-name")
-#     if tk:
-#         add(by_name.get(tk, []), 3, "tvg-name=name")
-#     if tid and tid.lower() in by_id:
-#         # ids can collide across playlists: require a similar name and the SAME quality tag
-#         mine_q = quality_tag(extinf)
-#         add([(e, b) for e, b in by_id[tid.lower()]
-#              if quality_tag(e) == mine_q
-#              and difflib.SequenceMatcher(None, nk, norm_name(e)).ratio() >= 0.6], 4, "tvg-id")
-#     out.sort(key=lambda c: c[2])
-#     return out, (out[0][3] if out else None)
-#
-#
-# def usable(body):
-#     return not expired(body) and app_can_play(body)
-#
-#
-# def update(mine_text, source_texts):
-#     by_id, by_tvg, by_name = build_index(source_texts)
-#     head, mine = parse(mine_text)
-#     replaced, dirty = 0, False
-#     still_dead = []
-#
-#     # Step 1: test my own entries
-#     print("step 1: testing %d entries in my playlist..." % len(mine))
-#     prefetch_health([b for _, b in mine if url_of(b)], "my entries")
-#
-#     # Step 2: test every source link for the channels that are not working in my file
-#     need = []
-#     for extinf, body in mine:
-#         if health(body) is not True:
-#             cands, _ = find_candidates(extinf, by_id, by_tvg, by_name)
-#             need += [c[1] for c in cands if c[1] != body and usable(c[1])]
-#     print("step 2: testing %d source links for the dead channels..." % len({tuple(b) for b in need}))
-#     prefetch_health(need, "source links")
-#
-#     # Links already used by my entries of the same channel, so backups stay distinct.
-#     taken = {}
-#     for e, b in mine:
-#         taken.setdefault(norm_name(e), set()).add(tuple(b))
-#
-#     def best_of(lst):
-#         # best match type first, then latest token expiry
-#         return min(lst, key=lambda c: (c[2], -(expiry(c[1]) or 10 ** 12)))
-#
-#     # Step 3: keep working entries, replace dead ones
-#     for block in mine:
-#         extinf, body = block
-#         name = display_name(extinf)
-#         nkey = norm_name(extinf)
-#         cands, _ = find_candidates(extinf, by_id, by_tvg, by_name)
-#
-#         if ADD_MISSING_TVG_ID and cands and not attr(extinf, "tvg-id"):
-#             sid = next((attr(c[0], "tvg-id") for c in cands if attr(c[0], "tvg-id")), None)
-#             if sid:
-#                 block[0] = add_tvg_id(extinf, sid)
-#                 dirty = True
-#
-#         state = health(body)
-#         if state is True:
-#             continue                      # working -> keep exactly as it is
-#
-#         if not cands:
-#             print("NO MATCH in any source: %s  (key: %s | mine: %s)" % (name, nkey, reason(body)))
-#             still_dead.append(name)
-#             continue
-#
-#         fresh = [c for c in cands
-#                  if c[1] != body and tuple(c[1]) not in taken[nkey] and usable(c[1])]
-#
-#         # 1) a candidate that is verified working
-#         working = [c for c in fresh if health(c[1]) is True]
-#         best, kind = None, ""
-#         if working:
-#             best, kind = best_of(working), "verified"
-#         # 2) none verified: if MY link is confirmed dead, automatically take the best
-#         #    unverifiable candidate (401/403/451 here) - best match, newest expiry
-#         elif state is False:
-#             unv = [c for c in fresh if health(c[1]) is None]
-#             if unv:
-#                 best, kind = best_of(unv), "UNVERIFIED (blocked here, may work elsewhere)"
-#
-#         if best:
-#             new = best[1]
-#             block[1] = list(new)
-#             taken[nkey].add(tuple(new))
-#             replaced += 1
-#             dirty = True
-#             print("replaced [%s] (%s) from [%s]: %s  (was: %s)"
-#                   % (kind, best[3], src_of(new), name, reason(body)))
-#         else:
-#             n_unv = sum(1 for c in fresh if health(c[1]) is None)
-#             print("KEPT OLD LINK, no replacement in any source: %s  "
-#                   "(mine: %s | %d source links tried, %d unverifiable)"
-#                   % (name, reason(body), len(fresh), n_unv))
-#             still_dead.append(name)
-#
-#     out = None
-#     if dirty:
-#         out = "\n".join(head + [x for e, b in mine for x in [e] + b]) + "\n"
-#     return out, replaced, still_dead
-#
-#
-# # def fetch(url):
-# #     req = urllib.request.Request(url, headers={"User-Agent": UA})
-# #     return urllib.request.urlopen(req, timeout=60).read().decode("utf-8", "ignore")
-# def fetch(src):
-#     if os.path.isfile(src):
-#         with open(src, encoding="utf-8", errors="ignore") as f:
-#             return f.read()
-#     req = urllib.request.Request(src, headers={"User-Agent": UA})
-#     return urllib.request.urlopen(req, timeout=60).read().decode("utf-8", "ignore")
-#
-# def src_label(url):
-#     parts = url.split("/")
-#     return "%s/%s" % (parts[3] if len(parts) > 3 else "?", parts[-1])
-#
-#
-# def check_ffmpeg():
-#     try:
-#         subprocess.run([FFMPEG_PATH, "-version"], capture_output=True, timeout=15, check=True)
-#     except Exception:
-#         sys.exit("ffmpeg not found (%s). Install it first, e.g. 'sudo apt-get install -y ffmpeg' "
-#                  "on the runner, or set FFMPEG_PATH." % FFMPEG_PATH)
-#
-#
-# def main():
-#     check_ffmpeg()
-#     texts, seen = [], set()
-#     for u in SOURCES:
-#         if u in seen:
-#             continue
-#         seen.add(u)
-#         try:
-#             t = fetch(u)
-#         except Exception as e:
-#             print("[SOURCE ERROR]", u, e)
-#             continue
-#         n = sum(1 for _, b in parse(t)[1] if url_of(b))
-#         print("[SOURCE OK] %4d entries | %s" % (n, src_label(u)))
-#         texts.append((src_label(u), t))
-#     if not texts:
-#         sys.exit("no source playlist could be loaded")
-#
-#     with open(MINE, encoding="utf-8") as f:
-#         mine_text = f.read()
-#
-#     out, replaced, still_dead = update(mine_text, texts)
-#     if out is not None:
-#         with open(MINE, "w", encoding="utf-8") as f:
-#             f.write(out)
-#     print("total replaced:", replaced)
-#     if still_dead:
-#         print("still not working (%d):" % len(still_dead))
-#         for n in still_dead:
-#             print("  -", n)
-#
-#
-# if __name__ == "__main__":
-#     main()
 
-# <----------------------------------THIS PART IS JUST FOR TESTING CODE----------------------------------------------->
 """
 Keeps data/Entertainments.m3u working.
 
@@ -605,11 +35,7 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 
 SOURCES = [
-# CHANGED 2026-10-17 12:41 UTC: the pool is now read from the local file that merge_all.py
-# just wrote in the checkout (no raw-URL cache delay, no need for "sleep 60" in sync.yml).
-# The original raw URL line is kept below, commented out.
-# "https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/TestTypes.m3u",
-"data/TestTypes.m3u",
+"https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/TestTypes.m3u",
 #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
 #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S13.m3u",
 #     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S10.m3u",
@@ -645,9 +71,6 @@ DECODE_SECONDS = 4          # how much video to really decode
 FFMPEG_TIMEOUT = 15         # seconds to wait on network inside ffmpeg
 MAX_WORKERS = int(os.environ.get("MAX_WORKERS", "6"))   # parallel health checks
 SHAKY_IS_OK = True          # decoded but printed startup warnings -> count as working
-# ADDED 2026-10-17 13:53 UTC: when True, a dead entry may copy the link details of ANOTHER entry for the same
-# channel that is already in my own file and works (e.g. two "Star Plus" entries, one dead, one working).
-COPY_FROM_SIBLINGS = True
 NULL_OUT = "NUL" if os.name == "nt" else "/dev/null"
 
 SRC_OF = {}                 # tuple(body) -> source labels that contain this entry
@@ -775,14 +198,6 @@ def expired(body):
     return e is not None and e < time.time() + EXPIRY_MARGIN
 
 
-# ADDED 2026-10-17 12:41 UTC: issued() returns the token's start time (st=...) so that, when
-# links can't be verified from this machine, the entry with the NEWER token can be preferred.
-def issued(body):
-    text = "\n".join(l for l in body if not l.lower().startswith("#kodiprop"))
-    m = re.search(r"[=~]st=(\d{9,11})", text)
-    return int(m.group(1)) if m else None
-
-
 def b64_to_hex(s):
     s = s.replace("-", "+").replace("_", "/")
     s += "=" * (-len(s) % 4)
@@ -842,15 +257,6 @@ def decode_test(url, headers, key):
     return ("shaky", last) if err else ("ok", "")
 
 
-# ADDED 2026-10-17 12:41 UTC: hosts that only answer from inside India. When the sync runs on a
-# GitHub runner (outside India) a failure on these hosts is NOT proof the link is dead.
-GEO_HOSTS = ("cdn.jio.com",)          # reachable only from India
-
-
-def geo(url):
-    return any(h in url for h in GEO_HOSTS)
-
-
 def probe(body):
     """Returns (state, reason). state: True working, False dead, None can't verify."""
     url = url_of(body)
@@ -872,15 +278,9 @@ def probe(body):
             break
         except Exception as e:
             err = str(e)[:60]
-    # CHANGED 2026-10-17 12:41 UTC: on geo-fenced Jio hosts a failed request / non-200 answer is now
-    # "unverifiable" (None) instead of "dead" (False). Original lines kept below, commented out.
-    # if status is None:
-    #     return False, "request failed: %s" % err
-    # if status in (401, 403, 451):
-    #     return None, "HTTP %d (blocked for this server)" % status
     if status is None:
-        return (None if geo(url) else False), "request failed: %s" % err
-    if status in (401, 403, 451) or (geo(url) and status != 200):
+        return False, "request failed: %s" % err
+    if status in (401, 403, 451):
         return None, "HTTP %d (blocked for this server)" % status
     if status != 200:
         return False, "HTTP %d" % status
@@ -1074,20 +474,11 @@ def update(mine_text, source_texts):
             still_dead.append(name)
             continue
 
-        # CHANGED 2026-10-17 13:53 UTC: "taken" used to block every link already present in my file for this
-        # channel, so a dead "Star Plus" could never copy the working "Star Plus" from the same file.
-        # Distinct links are still preferred; links used by another entry are kept as "siblings".
-        # fresh = [c for c in cands
-        #          if c[1] != body and tuple(c[1]) not in taken[nkey] and usable(c[1])]
-        fresh_all = [c for c in cands if c[1] != body and usable(c[1])]
-        fresh = [c for c in fresh_all if tuple(c[1]) not in taken[nkey]]
-        siblings = [c for c in fresh_all if tuple(c[1]) in taken[nkey]] if COPY_FROM_SIBLINGS else []
+        fresh = [c for c in cands
+                 if c[1] != body and tuple(c[1]) not in taken[nkey] and usable(c[1])]
 
         # 1) a candidate that is verified working
         working = [c for c in fresh if health(c[1]) is True]
-        if not working:
-            # ADDED 2026-10-17 13:53 UTC: no distinct working link -> copy one that already works in my own file
-            working = [c for c in siblings if health(c[1]) is True]
         best, kind = None, ""
         if working:
             best, kind = best_of(working), "verified"
@@ -1097,28 +488,6 @@ def update(mine_text, source_texts):
             unv = [c for c in fresh if health(c[1]) is None]
             if unv:
                 best, kind = best_of(unv), "UNVERIFIED (blocked here, may work elsewhere)"
-        # ADDED 2026-10-17 12:41 UTC: my link is only "unverifiable" (e.g. geo-blocked on the runner)
-        # and its token runs out within 2 hours -> switch to a source link with a NEWER token
-        # (also unverified). The 2-hour limit stops it swapping links on every 30-minute run.
-        elif state is None:
-            e = expiry(body)
-            if e is not None and e - time.time() < 2 * 3600:   # mine expires within 2h
-                newer = [c for c in fresh
-                         if health(c[1]) is not False
-                         and (issued(c[1]) or 0) > (issued(body) or 0)]
-                if newer:
-                    best = max(newer, key=lambda c: issued(c[1]))
-                    kind = "NEWER TOKEN (unverified)"
-
-        # ADDED 2026-10-17 13:53 UTC: my link is unverifiable here AND has no key and no token (a bare Jio link
-        # cannot be decrypted by the app), while another entry for the same channel in my file has a
-        # key and a still-valid token (e.g. the Hotstar "Star Plus") -> copy its details (unverified).
-        if best is None and COPY_FROM_SIBLINGS and state is None \
-                and expiry(body) is None and not key_raw_of(body):
-            sib = [c for c in siblings
-                   if health(c[1]) is None and key_raw_of(c[1]) and expiry(c[1]) is not None]
-            if sib:
-                best, kind = best_of(sib), "COPIED from keyed entry already in my file (unverified)"
 
         if best:
             new = best[1]
@@ -1144,8 +513,6 @@ def update(mine_text, source_texts):
 # def fetch(url):
 #     req = urllib.request.Request(url, headers={"User-Agent": UA})
 #     return urllib.request.urlopen(req, timeout=60).read().decode("utf-8", "ignore")
-# CHANGED 2026-10-17 12:41 UTC: fetch() now accepts a local file path as well as a URL
-# (needed because SOURCES now points to the local data/TestTypes.m3u).
 def fetch(src):
     if os.path.isfile(src):
         with open(src, encoding="utf-8", errors="ignore") as f:
@@ -1200,8 +567,9 @@ def main():
 
 if __name__ == "__main__":
     main()
-#<___________________________________THIS PART ENDS HERE _______________________________________________>
-#
+
+
+
 
 
 
