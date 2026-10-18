@@ -691,16 +691,11 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Super_Hungama_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="248" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/MTV.png" group-title="Music",MTV
 http://198.58.104.90:8989/mtv/index.m3u8
 #EXTINF:-1 tvg-id="1145" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/MTV_HD_Plus.png" group-title="Music",MTV HD
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#EXTVLCOPT:http-user-agent=izzigo/11.5.1(18)_prd izzigo ahh (Linux;Android 16) AndroidXMedia3/1.0.2
+#EXTVLCOPT:http-referrer=https://www.izzigo.tv/webclient/
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=b8972143db295ee891a18692ddee0f8b:c48a806fadcb2ef8ae800d128c6f3332
-#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Virat&Referer=https://www.jiotv.com/&Origin=https://www.jiotv.com/&Cookie=__hdnea__=st=1792297808~exp=1792319408~acl=/*~hmac=3e8b1e7f89d676bbbcd7cd5ed9703d259920c57761d2937e1de597f1ea593647
-#EXTVLCOPT:http-user-agent=Virat
-#EXTVLCOPT:http-referrer=https://www.jiotv.com/
-#EXTVLCOPT:http-cookie=__hdnea__=st=1792297808~exp=1792319408~acl=/*~hmac=3e8b1e7f89d676bbbcd7cd5ed9703d259920c57761d2937e1de597f1ea593647
-#EXTHTTP:{"User-Agent": "Virat", "Referer": "https://www.jiotv.com/", "Origin": "https://www.jiotv.com/", "Cookie": "__hdnea__=st=1792297808~exp=1792319408~acl=/*~hmac=3e8b1e7f89d676bbbcd7cd5ed9703d259920c57761d2937e1de597f1ea593647"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/MTV_HD_Plus_MOB/WDVLive/index.mpd
+#KODIPROP:inputstream.adaptive.license_key=ac11ba753fcabc56b965e1801ff8df19:64a7852cc7737515ac71c017f03fdd32
+https://live3-ott.izzigo.tv/12/out/u/dash/MTV-HD/default.mpd
 #EXTINF:-1 tvg-id="585" tvg-chno="451" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0025L26R.png?lock=720x540" group-title="Music",Zing
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
