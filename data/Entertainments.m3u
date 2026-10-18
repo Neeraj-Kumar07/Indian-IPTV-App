@@ -926,7 +926,16 @@ https://d2vfwvjxwtwq1t.cloudfront.net/out/v1/6b24239d5517495b986e7705490c6e65/in
 #EXTINF:-1 tvg-id="611" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Darshan_24.png" group-title="Devotional",Darshan 24
 http://14.96.244.82:5001/live/611.m3u8
 #EXTINF:-1 tvg-id="596" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Jinvani_TV.png" group-title="Devotional",Jinvani TV
-http://14.96.244.82:5001/live/596.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=ccc6986b0b79525888d52baf1c5c5ad7:02a41c5ca2f1646fb9253ed1124c6757
+#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Virat&Referer=https://www.jiotv.com/&Origin=https://www.jiotv.com/&Cookie=__hdnea__=st=1792281604~exp=1792303204~acl=/*~hmac=42dbbb17be703e4b0bb95be6f253eb76f9f6645eb23a1c15e490980a969db169
+#EXTVLCOPT:http-user-agent=Virat
+#EXTVLCOPT:http-referrer=https://www.jiotv.com/
+#EXTVLCOPT:http-cookie=__hdnea__=st=1792281604~exp=1792303204~acl=/*~hmac=42dbbb17be703e4b0bb95be6f253eb76f9f6645eb23a1c15e490980a969db169
+#EXTHTTP:{"User-Agent": "Virat", "Referer": "https://www.jiotv.com/", "Origin": "https://www.jiotv.com/", "Cookie": "__hdnea__=st=1792281604~exp=1792303204~acl=/*~hmac=42dbbb17be703e4b0bb95be6f253eb76f9f6645eb23a1c15e490980a969db169"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/Jinvani_TV_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="601" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Ishwar_TV.png" group-title="Devotional",Ishwar TV
 http://14.96.244.82:5001/live/601.m3u8
 #EXTINF:-1 tvg-id="602" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Paras_tv.png" group-title="Devotional",Paras tv
