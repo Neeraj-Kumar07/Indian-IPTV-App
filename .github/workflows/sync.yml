@@ -42,6 +42,7 @@ jobs:
       # 3) Fix my playlist using the pool (read from the raw URL)
       - name: Sync
         run: python3 sync.py
+      - run: python3 sync2.py
 
       # 4) Publish the fixed playlist
       - name: Publish playlist
