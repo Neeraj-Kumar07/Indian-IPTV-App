@@ -25,6 +25,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
           pip install requests
+          
+          
+        # 0) Remove dead channels from the pool first
+      - name: dead_links_remove channels
+        run: python3 dead_links_remove.py
 
       # 1) Build the merged pool from all source links
       - name: Merge sources
