@@ -1,60 +1,55 @@
 
-#THIS IS 3RD NEW ADDED ONE
-name: sync-channels
-
-on:
-  schedule:
-    - cron: "7,37 * * * *"
-  workflow_dispatch:
-
-permissions:
-  contents: write
-
-concurrency:
-  group: sync-channels
-  cancel-in-progress: false
-
-jobs:
-  sync:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 45
-    steps:
-      - uses: actions/checkout@v5
-
-      - run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-          pip install requests
-          
-          
-        # 0) Remove dead channels from the pool first
-      - name: dead_links_remove channels
-        run: python3 dead_links_remove.py
-
-      # 1) Build the merged pool from all source links
-      - name: Merge sources
-        run: python3 merge_all.py
-
-      # 2) Publish the pool so the raw GitHub URL serves the new version
-      - name: Publish merged pool
-        run: |
-          git config user.name "bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add data/TestTypes.m3u
-          git diff --cached --quiet || (git commit -m "update merged pool" && git pull --rebase && git push)
-          
-
-      # 3) Fix my playlist using the pool (read from the raw URL)
-      - name: Sync
-        run: python3 sync.py
-      - run: python3 sync2.py
-
-      # 4) Publish the fixed playlist
-      - name: Publish playlist
-        run: |
-          git add data/Entertainments.m3u
-          git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
-
+##THIS IS 3RD NEW ADDED ONE
+#name: sync-channels
+#
+#on:
+#  schedule:
+#    - cron: "7,37 * * * *"
+#  workflow_dispatch:
+#
+#permissions:
+#  contents: write
+#
+#concurrency:
+#  group: sync-channels
+#  cancel-in-progress: false
+#
+#jobs:
+#  sync:
+#    runs-on: ubuntu-24.04
+#    timeout-minutes: 45
+#    steps:
+#      - uses: actions/checkout@v5
+#
+#      - run: |
+#          sudo apt-get update
+#          sudo apt-get install -y ffmpeg
+#          pip install requests
+#
+#      # 1) Build the merged pool from all source links
+##      - name: Merge sources
+##        run: python3 merge_all.py
+#
+#      # 2) Publish the pool so the raw GitHub URL serves the new version
+##      - name: Publish merged pool
+##        run: |
+##          git config user.name "bot"
+##          git config user.email "bot@users.noreply.github.com"
+##          git add data/TestTypes.m3u
+##          git diff --cached --quiet || (git commit -m "update merged pool" && git pull --rebase && git push)
+##
+#
+#      # 3) Fix my playlist using the pool (read from the raw URL)
+#      - name: Sync
+#        run: python3 sync.py
+#      - run: python3 sync2.py
+#
+#      # 4) Publish the fixed playlist
+#      - name: Publish playlist
+#        run: |
+#          git add data/Entertainments.m3u
+#          git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
+#
 
 
 #////////////////////////////////////////////////////////////////////////
@@ -96,43 +91,43 @@ jobs:
 
 #////////////////////////////////////////////////////////////////////
 #THIS IS WHEM SYNC2 IS UPDATE
-#name: sync-channels
-#
-#on:
-#  schedule:
-#    - cron: "7 * * * *"
-#  workflow_dispatch:
-#
-#permissions:
-#  contents: write
-#
-#concurrency:
-#  group: sync-channels
-#  cancel-in-progress: false
-#
-#jobs:
-#  sync:
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 45
-#    steps:
-#      - uses: actions/checkout@v5
-#
-#      - run: |
-#          sudo apt-get update
-#          sudo apt-get install -y ffmpeg
-#          pip install requests
+name: sync-channels
 
-#      # 1) replace dead links (checks each link first)
-#      - run: python3 sync.py
-#        env:
-#          MAX_WORKERS: "8"
-#
-#      # 2) overwrite link details for channels found in the source (no checking)
-#      - run: python3 sync2.py
-#
-#      # 3) one commit and one push for both scripts
-#      - run: |
-#          git config user.name "bot"
-#          git config user.email "bot@users.noreply.github.com"
-#          git add data/Entertainments.m3u
-#          git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-channels
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install requests
+
+      # 1) replace dead links (checks each link first)
+      - run: python3 sync.py
+        env:
+          MAX_WORKERS: "8"
+
+      # 2) overwrite link details for channels found in the source (no checking)
+      - run: python3 sync2.py
+
+      # 3) one commit and one push for both scripts
+      - run: |
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/Entertainments.m3u
+          git diff --cached --quiet || (git commit -m "sync links" && git pull --rebase && git push)
