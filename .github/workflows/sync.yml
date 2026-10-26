@@ -123,7 +123,7 @@ jobs:
           MAX_WORKERS: "8"
 
       # 2) overwrite link details for channels found in the source (no checking)
-      - run: python3 sync2.py
+#      - run: python3 sync2.py
 
       # 3) one commit and one push for both scripts
       - run: |
