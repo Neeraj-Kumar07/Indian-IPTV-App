@@ -34,9 +34,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import requests
 
-SOURCES = ["https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/my_channels.m3u",
-"https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/Entertainments.m3u",
-
+SOURCES = [
     "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/JioTV_S12.m3u",
     "https://raw.githubusercontent.com/sportlive18/Sonyliv-Playlist-Autoupdate/refs/heads/main/sony.m3u",
     "https://raw.githubusercontent.com/Prtstream820894/Api/a2a65a0619b7e681c9761c393038b936c55b3e8c/jioplaylist.m3u",
