@@ -1,13 +1,6 @@
 
-// ///////////////////////////////////////////////
 
-
-
-
-
-/*THIS IS THE CURRENT MAIN CODE */
-
-// THIS FILE CONTAIN "HOME.DART " CODE :
+// HOME.DART
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -17,6 +10,18 @@ import '/screens/player.dart';
 import '../model/channel.dart';
 import '../model/stream_source.dart';
 import '../provider/channels_provider.dart';
+
+/// One chip in the filter row under the search bar.
+class _GroupFilter {
+  final String label;
+  final IconData icon;
+
+  /// A channel matches if its group-title contains ANY of these
+  /// (case-insensitive). Empty list = show everything ("All").
+  final List<String> keywords;
+
+  const _GroupFilter(this.label, this.icon, this.keywords);
+}
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -28,16 +33,28 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // Grid layout. Tile width is flexible (columns are computed from the
   // screen width); height is fixed so scroll offsets can be calculated.
-  static const double _tileHeight = 100;
-  static const double _spacing = 10;
-  static const double _gridPadding = 12;
+  static const double _tileHeight = 84;
+  static const double _spacing = 8;
+  static const double _gridPadding = 8;
 
-  // Screens narrower than this (phones) get 1 column, wider ones (TV,
-  // tablet, emulator) get 3. Set from LayoutBuilder in build; used by the
-  // key handlers and scroll maths.
   static const double _phoneBreakpoint = 600;
   static const int _tvColumns = 3;
   int _columns = 1;
+
+  // Filter chips shown under the search bar.
+  static const List<_GroupFilter> _groups = [
+    _GroupFilter('All', Icons.grid_view_rounded, []),
+    _GroupFilter('Sports', Icons.sports_cricket_rounded, ['sport']),
+    _GroupFilter(
+        'Entertainment', Icons.theater_comedy_rounded, ['entertain']),
+    _GroupFilter('Movies', Icons.movie_rounded, ['movie', 'cinema']),
+    _GroupFilter('News', Icons.newspaper_rounded, ['news']),
+    _GroupFilter('Devotional', Icons.temple_hindu_rounded,
+        ['devotion', 'religio', 'spirit']),
+    _GroupFilter(
+        'Kids', Icons.face_rounded, ['kid', 'cartoon', 'children']),
+  ];
+  int _selectedGroup = 0;
 
   List<Channel> channels = [];
   List<Channel> filteredChannels = [];
@@ -54,6 +71,8 @@ class _HomeState extends State<Home> {
   final FocusNode _backFocusNode = FocusNode();
   final FocusNode _searchFocusNode = FocusNode();
   final List<FocusNode> _channelFocusNodes = [];
+  final List<FocusNode> _chipFocusNodes =
+  List.generate(_groups.length, (_) => FocusNode());
 
   // ------------------------------------------------------------
   // INIT
@@ -63,8 +82,6 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    // Key handlers attached directly to the nodes so they run BEFORE
-    // the TextField / IconButton consume the key.
     _searchFocusNode.onKeyEvent = _handleSearchKey;
     _backFocusNode.onKeyEvent = _handleBackKey;
 
@@ -75,8 +92,6 @@ class _HomeState extends State<Home> {
   // FOCUS NODE MANAGEMENT
   // ------------------------------------------------------------
 
-  /// Dispose nodes AFTER the current frame, so widgets that are still
-  /// mounted don't try to use a disposed node.
   void _disposeLater(List<FocusNode> nodes) {
     if (nodes.isEmpty) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -136,10 +151,8 @@ class _HomeState extends State<Home> {
   void _focusChannel(int index) {
     if (index < 0 || index >= _channelFocusNodes.length) return;
 
-    // 1. Scroll so the tile gets built.
     _ensureVisible(index);
 
-    // 2. Focus it once it exists.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       if (index < _channelFocusNodes.length) {
@@ -148,6 +161,8 @@ class _HomeState extends State<Home> {
     });
     WidgetsBinding.instance.scheduleFrame();
   }
+
+  void _focusChips() => _chipFocusNodes[_selectedGroup].requestFocus();
 
   // ------------------------------------------------------------
   // LOAD STREAM CATEGORIES
@@ -183,6 +198,7 @@ class _HomeState extends State<Home> {
     setState(() {
       _isLoading = true;
       selectedSource = source;
+      _selectedGroup = 0;
       searchController.clear();
     });
 
@@ -229,32 +245,52 @@ class _HomeState extends State<Home> {
       selectedSource = null;
       channels = [];
       filteredChannels = [];
+      _selectedGroup = 0;
       searchController.clear();
     });
   }
 
   // ------------------------------------------------------------
-  // SEARCH
+  // SEARCH + GROUP FILTER
   // ------------------------------------------------------------
 
-  // Uses channelsProvider.filterChannels, which searches
-  // name + tvg-id + group-title (see channels_provider.dart).
+  /// Applies the search text AND the selected chip to the loaded channels.
+  void _applyFilters() {
+    final query = searchController.text.trim();
+    List<Channel> list =
+    query.isEmpty ? channels : channelsProvider.filterChannels(query);
+
+    final keywords = _groups[_selectedGroup].keywords;
+    if (keywords.isNotEmpty) {
+      list = list.where((c) {
+        final g = (c.groupTitle ?? '').toLowerCase();
+        return keywords.any(g.contains);
+      }).toList();
+    }
+
+    setState(() {
+      filteredChannels = list;
+      _updateChannelFocusNodes();
+    });
+
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(0);
+    }
+  }
+
   void filterChannels(String query) {
     _debounceTimer?.cancel();
-
     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
-      final filteredData = channelsProvider.filterChannels(query);
       if (!mounted) return;
-
-      setState(() {
-        filteredChannels = filteredData;
-        _updateChannelFocusNodes();
-      });
-
-      if (_scrollController.hasClients) {
-        _scrollController.jumpTo(0);
-      }
+      _applyFilters();
     });
+  }
+
+  void _selectGroup(int i) {
+    if (i == _selectedGroup) return;
+    _debounceTimer?.cancel();
+    setState(() => _selectedGroup = i);
+    _applyFilters();
   }
 
   // ------------------------------------------------------------
@@ -292,7 +328,7 @@ class _HomeState extends State<Home> {
     return KeyEventResult.ignored;
   }
 
-  // Search: UP -> back arrow, DOWN -> first channel
+  // Search: UP -> back arrow, DOWN -> chips, OK -> first channel
   KeyEventResult _handleSearchKey(FocusNode node, KeyEvent event) {
     if (event is KeyDownEvent || event is KeyRepeatEvent) {
       final key = event.logicalKey;
@@ -302,11 +338,45 @@ class _HomeState extends State<Home> {
         return KeyEventResult.handled;
       }
 
-      if (key == LogicalKeyboardKey.arrowDown || _isSelectKey(key)) {
-        if (_channelFocusNodes.isNotEmpty) {
-          _focusChannel(0);
-          return KeyEventResult.handled;
+      if (key == LogicalKeyboardKey.arrowDown) {
+        _focusChips();
+        return KeyEventResult.handled;
+      }
+
+      if (_isSelectKey(key) && _channelFocusNodes.isNotEmpty) {
+        _focusChannel(0);
+        return KeyEventResult.handled;
+      }
+    }
+    return KeyEventResult.ignored;
+  }
+
+  // Chip: LEFT / RIGHT move, UP -> search, DOWN -> grid, OK -> select
+  KeyEventResult _handleChipKey(int i, FocusNode node, KeyEvent event) {
+    if (event is KeyDownEvent || event is KeyRepeatEvent) {
+      final key = event.logicalKey;
+
+      if (key == LogicalKeyboardKey.arrowLeft) {
+        if (i > 0) _chipFocusNodes[i - 1].requestFocus();
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.arrowRight) {
+        if (i < _chipFocusNodes.length - 1) {
+          _chipFocusNodes[i + 1].requestFocus();
         }
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.arrowUp) {
+        _searchFocusNode.requestFocus();
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.arrowDown) {
+        if (_channelFocusNodes.isNotEmpty) _focusChannel(0);
+        return KeyEventResult.handled;
+      }
+      if (event is KeyDownEvent && _isSelectKey(key)) {
+        _selectGroup(i);
+        return KeyEventResult.handled;
       }
     }
     return KeyEventResult.ignored;
@@ -321,7 +391,7 @@ class _HomeState extends State<Home> {
 
       if (key == LogicalKeyboardKey.arrowUp) {
         if (index < cols) {
-          _searchFocusNode.requestFocus(); // top row -> search
+          _focusChips(); // top row -> chips
         } else {
           _focusChannel(index - cols);
         }
@@ -333,7 +403,6 @@ class _HomeState extends State<Home> {
         if (next < total) {
           _focusChannel(next);
         } else if (index ~/ cols < (total - 1) ~/ cols) {
-          // Last row is shorter: go to its last item instead of doing nothing.
           _focusChannel(total - 1);
         }
         return KeyEventResult.handled;
@@ -351,7 +420,6 @@ class _HomeState extends State<Home> {
         return KeyEventResult.handled;
       }
 
-      // Only on key DOWN (not repeat) so holding OK doesn't push twice.
       if (event is KeyDownEvent && _isSelectKey(key)) {
         _playChannel(index);
         return KeyEventResult.handled;
@@ -375,6 +443,9 @@ class _HomeState extends State<Home> {
       node.dispose();
     }
     _channelFocusNodes.clear();
+    for (final node in _chipFocusNodes) {
+      node.dispose();
+    }
     super.dispose();
   }
 
@@ -495,7 +566,7 @@ class _HomeState extends State<Home> {
       children: [
         // TOP BAR: back button, category title, channel count
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
           child: Row(
             children: [
               IconButton.filledTonal(
@@ -545,7 +616,7 @@ class _HomeState extends State<Home> {
 
         // SEARCH
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+          padding: const EdgeInsets.fromLTRB(16, 6, 16, 4),
           child: TextField(
             focusNode: _searchFocusNode,
             controller: searchController,
@@ -557,7 +628,7 @@ class _HomeState extends State<Home> {
               filled: true,
               fillColor: scheme.surfaceContainerLowest,
               contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(color: scheme.outlineVariant),
@@ -571,6 +642,20 @@ class _HomeState extends State<Home> {
                 borderSide: BorderSide(color: primary, width: 2.5),
               ),
             ),
+          ),
+        ),
+
+        // GROUP FILTER CHIPS
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
+          child: Row(
+            children: [
+              for (int i = 0; i < _groups.length; i++) ...[
+                if (i > 0) const SizedBox(width: 12),
+                _buildGroupChip(i),
+              ],
+            ],
           ),
         ),
 
@@ -598,7 +683,8 @@ class _HomeState extends State<Home> {
               return GridView.builder(
                 controller: _scrollController,
                 padding: const EdgeInsets.all(_gridPadding),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: _columns,
                   mainAxisExtent: _tileHeight,
                   crossAxisSpacing: _spacing,
@@ -616,6 +702,85 @@ class _HomeState extends State<Home> {
           ),
         ),
       ],
+    );
+  }
+
+  // One pill in the filter row. Selected = filled purple, otherwise
+  // outlined. Focus (D-pad) = thicker border + slight scale.
+  Widget _buildGroupChip(int i) {
+    final scheme = Theme.of(context).colorScheme;
+    final primary = scheme.primary;
+    final group = _groups[i];
+    final node = _chipFocusNodes[i];
+    final selected = i == _selectedGroup;
+    final focused = node.hasFocus;
+
+    final fg = selected ? scheme.onPrimary : scheme.onSurface;
+
+    return Focus(
+      focusNode: node,
+      onFocusChange: (hasFocus) {
+        if (hasFocus && node.context != null) {
+          Scrollable.ensureVisible(
+            node.context!,
+            alignment: 0.5,
+            duration: const Duration(milliseconds: 150),
+          );
+        }
+        if (mounted) setState(() {});
+      },
+      onKeyEvent: (n, event) => _handleChipKey(i, n, event),
+      child: AnimatedScale(
+        scale: focused ? 1.06 : 1.0,
+        duration: const Duration(milliseconds: 120),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: selected ? primary : scheme.surfaceContainerLowest,
+            border: Border.all(
+              color: focused
+                  ? primary
+                  : (selected ? primary : scheme.outlineVariant),
+              width: focused ? 3 : 1.5,
+            ),
+            boxShadow: focused
+                ? [
+              BoxShadow(
+                color: primary.withValues(alpha: 0.35),
+                blurRadius: 12,
+                offset: const Offset(0, 3),
+              ),
+            ]
+                : null,
+          ),
+          child: ExcludeFocus(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(30),
+              onTap: () => _selectGroup(i),
+              child: Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(group.icon, size: 22, color: fg),
+                    const SizedBox(width: 8),
+                    Text(
+                      group.label,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: fg,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -680,35 +845,28 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        // ExcludeFocus: the tile must not steal focus
-        // from the Focus node above.
         child: ExcludeFocus(
           child: InkWell(
             borderRadius: BorderRadius.circular(16),
             onTap: () => _playChannel(index),
             child: Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               child: Row(
                 children: [
-                  // Logo from tvg-logo; falls back to the local TV icon
-                  // if missing or failing.
                   SizedBox(
-                    width: 88,
-                    height: 76,
+                    width: 80,
+                    height: 64,
                     child: channel.logoUrl.startsWith('http')
                         ? Image.network(
                       channel.logoUrl,
                       fit: BoxFit.contain,
-                      // Some logo CDNs reject Dart's default
-                      // User-Agent, so send a browser-like one.
                       headers: const {
                         'User-Agent':
                         'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 '
                             '(KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36',
                       },
                       errorBuilder: (context, error, stackTrace) {
-                        // Shows the exact reason in the debug console.
                         debugPrint(
                             'Logo failed: ${channel.logoUrl} -> $error');
                         return Image.asset('assets/images/tv-icon.png',
@@ -728,19 +886,21 @@ class _HomeState extends State<Home> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                            fontSize: 19,
+                            fontSize: 18,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                         const SizedBox(height: 6),
                         Row(
                           children: [
-                            _chip(
-                              'ID: ${channel.displayId}',
-                              bg: hasId
-                                  ? primary.withValues(alpha: 0.12)
-                                  : scheme.surfaceContainerHigh,
-                              fg: hasId ? primary : scheme.onSurfaceVariant,
+                            Flexible(
+                              child: _chip(
+                                'ID: ${channel.displayId}',
+                                bg: hasId
+                                    ? primary.withValues(alpha: 0.12)
+                                    : scheme.surfaceContainerHigh,
+                                fg: hasId ? primary : scheme.onSurfaceVariant,
+                              ),
                             ),
                             const SizedBox(width: 6),
                             Flexible(
@@ -793,8 +953,6 @@ class _CategoryCard extends StatefulWidget {
 class _CategoryCardState extends State<_CategoryCard> {
   bool _focused = false;
 
-  // Light pastel gradients, each with a deeper "ink" colour for the
-  // text, icon and focus ring so everything stays readable.
   static const List<List<Color>> _gradients = [
     [Color(0xFFEADDFF), Color(0xFFD0BCFF)], // lavender
     [Color(0xFFFFD9E2), Color(0xFFFFBFA8)], // blush -> peach
@@ -828,7 +986,6 @@ class _CategoryCardState extends State<_CategoryCard> {
     return Icons.live_tv_rounded;
   }
 
-  // Decorative translucent circle in the card background.
   Widget _bubble(double size, double alpha) => Container(
     width: size,
     height: size,
@@ -856,7 +1013,6 @@ class _CategoryCardState extends State<_CategoryCard> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          // Always 3px so the card doesn't shift when focus changes.
           border: Border.all(
             color: _focused ? ringColor : Colors.transparent,
             width: 3,
@@ -946,3 +1102,8 @@ class _CategoryCardState extends State<_CategoryCard> {
     );
   }
 }
+
+
+
+
+
