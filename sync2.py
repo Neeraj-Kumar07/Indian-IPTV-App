@@ -24,10 +24,7 @@ from sync import attr, display_name, norm_name, parse, url_of, app_can_play, MIN
 # ------------------------------------------------------------
 # SETTINGS
 # ------------------------------------------------------------
-FORCE_SOURCE = [
-# "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/tstar.m3u",
-"https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u",
-]       # <- put your ONE source playlist raw URL here
+FORCE_SOURCE = "https://raw.githubusercontent.com/purupc00-dev/Gmax-JioTV/refs/heads/main/Playlists/digital.m3u"        # <- put your ONE source playlist raw URL here
 
 # Channels to update. Write each name the way it appears in your playlist
 # ("| Gmax", spaces and capitals don't matter). Example:
