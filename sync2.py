@@ -200,7 +200,7 @@
 
 
 
-/////////////////////nnnnnnnnnnnnnnn//////////////
+# /////////////////////nnnnnnnnnnnnnnn//////////////
 """
 sync2.py  -  runs AFTER sync.py.
 
