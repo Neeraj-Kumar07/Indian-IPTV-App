@@ -336,12 +336,10 @@ https://livetv.hotstar.com/mp1/gec-india-1540068295/5a4eb3ac6e424eef8a30962d2232
 #EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","Cookie":"hdntl=exp=1793458754~acl=%2f*~id=9dc98f22f0a19c6b3ca1023eae2a8713~data=hdntl~hmac=b8c6f890fc500ef2579dfe95686aebd3a4c40c69e1f5f6b1ca672d8d54ef4825"}
 https://livetv.hotstar.com/mp2/gec-india-1540068298/9f99e1af0bdc465b8a3015e3a1a689d8/index.mpd?|cookie=hdntl=exp=1793458754~acl=%2f*~id=9dc98f22f0a19c6b3ca1023eae2a8713~data=hdntl~hmac=b8c6f890fc500ef2579dfe95686aebd3a4c40c69e1f5f6b1ca672d8d54ef4825&referer=https://www.hotstar.com/&origin=https://www.hotstar.com&user-agent=GmaxHub
 #EXTINF:-1 tvg-id="185" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/AndPicturesHD.png" group-title="Movies",& Pictures HD
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1793436316~exp=1793457916~acl=/bpk-tv/AndPicturesHD_BTS/WDVLive/*~hmac=d1a40a595c4103abad61f8b34a69e66a7f5a3baddd0ef02ecd92939f91eadd3d
-#EXTHTTP:{"Cookie":"__hdnea__=st=1793436316~exp=1793457916~acl=/bpk-tv/AndPicturesHD_BTS/WDVLive/*~hmac=d1a40a595c4103abad61f8b34a69e66a7f5a3baddd0ef02ecd92939f91eadd3d","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvpllive.cdn.jio.com/bpk-tv/AndPicturesHD_BTS/WDVLive/index.mpd
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=de8045e9f0fb4d03845dcc4a8bd7712a:6807bd09bda34ada83152908192af6d6
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5 (Linux;Android 14) ExoPlayerLib/2.11.7
+https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Andpictureshd/default/index.mpd
 #EXTINF:-1 tvg-id="1839" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/AndPictures.png" group-title="Movies",& Pictures
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1839
@@ -496,11 +494,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/History_18_Hindi_MOB/WDVLive/index.mpd
 https://jiotvmblive.cdn.jio.com/bpk-tv/TLCHindi_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="3458" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/TLCHDHindi.png" group-title="Lifestyle",TLC HD Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/3458
-https://onekey.virey40690.workers.dev/mpd/3458
-#
-# ======= CATEGORY: MALAYALAM =======
-#
+#KODIPROP:inputstream.adaptive.license_key=12ed56d780abcfebcd23aa27e4ac5009:6784567890abcfebcd23aa27e4ac2808
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/69.1 ExoPlayerLib/824.0
+https://wbd.skandha.tv/TLC_HD_India/TLC_HD_India.isml/.mpd
 #EXTINF:-1 tvg-id="527" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/IDHindi.png" group-title="Infotainment",Investigation Discovery Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=9aef395dfa3c501f9bacf0ccf76ef6da:76e19eWJh8J6Mx9DrGXKEv3ojKmqw8Cv9pscK
@@ -593,9 +589,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/ZeeZing_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="587" tvg-chno="464" tvg-logo="https://dtil.tmsimg.com/assets/s77447_ld_h15_aa.png?lock=720x540" group-title="Music",9XM
 https://wiselp.wiseplayout.com/9XM/master.m3u8
 #EXTINF:-1 tvg-id="587" tvg-logo="https://dtil.tmsimg.com/assets/s77447_ld_h15_aa.png?lock=720x540" group-title="Music",9XM
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/587
-https://onekey.virey40690.workers.dev/mpd/587
+https://d2o8pibksxtln6.cloudfront.net/live/media/9XM/hls_fta/9XM.m3u8
 #EXTINF:-1 tvg-id="1108" tvg-logo="https://img.media.jio.com/tvpimages/5/6/301982_1749665314605_l_medium.jpg" group-title="Sports",Star Sports 1 HD Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1108
@@ -1647,9 +1641,13 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/ZeeCinema_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="484" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeCinema.png" group-title="Movies",Zee Cinema
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1793436316~exp=1793457916~acl=/bpk-tv/ZeeCinema_BTS/WDVLive/*~hmac=83a5b8efe4a6c3bf5843b0787a31f5e983cea8aa0cbf031f1b6a1e64330919b6
-#EXTHTTP:{"Cookie":"__hdnea__=st=1793436316~exp=1793457916~acl=/bpk-tv/ZeeCinema_BTS/WDVLive/*~hmac=83a5b8efe4a6c3bf5843b0787a31f5e983cea8aa0cbf031f1b6a1e64330919b6","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=90d8713ba5e85d779d005b1f14a5bc8d:33650314fe1e945017640ba9878c5de9,90d8713ba5e85d779d005b1f14a5bc8d:33650314fe1e945017640ba9878c5de9
+#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Virat&Referer=https://www.jiotv.com/&Origin=https://www.jiotv.com/&Cookie=__hdnea__=st=1793457160~exp=1793460760~acl=/bpk-tv/ZeeCinema_BTS/WDVLive/*~hmac=fbd4dc68f4fe6f1d00416b16aae177a106c0e4a1323d0062d171ed9cfb1e8ad3
+#EXTVLCOPT:http-user-agent=Virat
+#EXTVLCOPT:http-referrer=https://www.jiotv.com/
+#EXTVLCOPT:http-cookie=__hdnea__=st=1793457160~exp=1793460760~acl=/bpk-tv/ZeeCinema_BTS/WDVLive/*~hmac=fbd4dc68f4fe6f1d00416b16aae177a106c0e4a1323d0062d171ed9cfb1e8ad3
+#EXTHTTP:{"User-Agent": "Virat", "Referer": "https://www.jiotv.com/", "Origin": "https://www.jiotv.com/", "Cookie": "__hdnea__=st=1793457160~exp=1793460760~acl=/bpk-tv/ZeeCinema_BTS/WDVLive/*~hmac=fbd4dc68f4fe6f1d00416b16aae177a106c0e4a1323d0062d171ed9cfb1e8ad3"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeCinema_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="2948" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeZestHD.png" group-title="Lifestyle",Zee Zest HD
 #KODIPROP:inputstream=inputstream.adaptive
