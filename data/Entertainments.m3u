@@ -1152,7 +1152,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Shri_Amarnath_Shrine_Board_MOB/WDVLive/in
 #EXTINF:-1 tvg-id="173" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aaj_Tak.png" group-title="News",Aaj Tak
 https://feeds.intoday.in/aajtak/api/master.m3u8
 #EXTINF:-1 tvg-id="173" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aaj_Tak.png" group-title="News",Aaj Tak
-https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-791258/master.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/173
+https://onekey.virey40690.workers.dev/mpd/173
 #EXTINF:-1 tvg-id="177" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ABP_News_India.png" group-title="News",ABP News India
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=8b8532e659a15d4ebfdb9675267140dd:5543d80c89009902be168fcde8b561b2
@@ -1453,7 +1455,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Merchant_Records_MOB/WDVLive/index.mpd
 #EXTHTTP:{"Origin": "https://www.jiotv.com/", "Referer": "https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/RS_Bharat_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="2753" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/YRF_Music.png" group-title="Music",YRF Music
-https://vidaa.kableone.com/hls/live/2111218/YrfMusic/master.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/2753
+https://onekey.virey40690.workers.dev/mpd/2753
 #EXTINF:-1 tvg-id="2252" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Desi_Music_Station.png" group-title="Music",Desi Music Station
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=0af751488d6c5c8a85822e8f2df2b773:c7de4bbc383ba63986bff966aee97a7d
