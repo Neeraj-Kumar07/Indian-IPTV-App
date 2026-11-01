@@ -278,10 +278,9 @@ https://onekey.virey40690.workers.dev/mpd/1668
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/SonyMAX1_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="165" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeCinemaHD.png" group-title="Movies",Zee Cinema HD
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=f56beaac9f124616872c741c9ce4fa4e:5d40a903238f4ad98abbed1877d4e3d1
-#EXTVLCOPT:http-user-agent=plaYtv/7.1.5 (Linux;Android 14) ExoPlayerLib/2.11.7
-https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeecinemahd/default/manifest.mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/165
+https://onekey.virey40690.workers.dev/mpd/165
 #EXTINF:-1 tvg-id="484" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeCinema.png" group-title="Movies",Zee Cinema
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/484
@@ -494,9 +493,11 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/History_18_Hindi_MOB/WDVLive/index.mpd
 https://jiotvmblive.cdn.jio.com/bpk-tv/TLCHindi_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="3458" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/TLCHDHindi.png" group-title="Lifestyle",TLC HD Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=12ed56d780abcfebcd23aa27e4ac5009:6784567890abcfebcd23aa27e4ac2808
-#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/69.1 ExoPlayerLib/824.0
-https://wbd.skandha.tv/TLC_HD_India/TLC_HD_India.isml/.mpd
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/3458
+https://onekey.virey40690.workers.dev/mpd/3458
+#
+# ======= CATEGORY: MALAYALAM =======
+#
 #EXTINF:-1 tvg-id="527" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/IDHindi.png" group-title="Infotainment",Investigation Discovery Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=9aef395dfa3c501f9bacf0ccf76ef6da:76e19eWJh8J6Mx9DrGXKEv3ojKmqw8Cv9pscK
@@ -589,7 +590,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/ZeeZing_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="587" tvg-chno="464" tvg-logo="https://dtil.tmsimg.com/assets/s77447_ld_h15_aa.png?lock=720x540" group-title="Music",9XM
 https://wiselp.wiseplayout.com/9XM/master.m3u8
 #EXTINF:-1 tvg-id="587" tvg-logo="https://dtil.tmsimg.com/assets/s77447_ld_h15_aa.png?lock=720x540" group-title="Music",9XM
-https://d2o8pibksxtln6.cloudfront.net/live/media/9XM/hls_fta/9XM.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/587
+https://onekey.virey40690.workers.dev/mpd/587
 #EXTINF:-1 tvg-id="1108" tvg-logo="https://img.media.jio.com/tvpimages/5/6/301982_1749665314605_l_medium.jpg" group-title="Sports",Star Sports 1 HD Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1108
@@ -1221,7 +1224,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/BBC_Hindi_MOB/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Aap_Ki_Adalat_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="520" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_Rajyasabha.png" group-title="News",Sansad TV HD
-https://d2o8pibksxtln6.cloudfront.net/live/media/Sansad_TV_HD/hls_fta/Sansad_TV_HD.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/520
+https://onekey.virey40690.workers.dev/mpd/520
 #EXTINF:-1 tvg-id="652" tvg-chno="654" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG00230QBL.png?lock=720x540" group-title="News",Zee Bharat
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=2105c1b37d2657e48bc856506c387e10:b74a42edb18e6833c71ff3f9c663fb49
@@ -1394,7 +1399,7 @@ https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zoom2/default/manifest.mpd
 #EXTINF:-1 tvg-id="250" tvg-chno="465" tvg-logo="https://dtil.tmsimg.com/assets/s143563_ld_h15_aa.png?lock=720x540" group-title="Music",Music India
 https://streams.tangotv.in/MUSICINDIA/ORIGIN/index.m3u8
 #EXTINF:-1 tvg-id="250" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Music_India.png" group-title="Music",Music India
-https://d2o8pibksxtln6.cloudfront.net/live/media/Music_India/hls_fta/Music_India.m3u8
+https://amg00416-amg00416c5-samsung-in-3259.playouts.now.amagi.tv/playlist/amg00416-travelxp-musicindia-samsungin/playlist.m3u8?ads.did=%7BPSID%7D&ads.dnt=%7BTARGETOPT%7D&ads.app_domain=%7BAPP_DOMAIN%7D&ads.app_name=%7BAPP_NAME%7D&ads.coppa=0
 #EXTINF:-1 tvg-id="440" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/9X_Jalwa.png" group-title="Music",9X Jalwa
 https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8
 #EXTINF:-1 tvg-id="440" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/9XJalwa.png" group-title="Music",9X Jalwa
