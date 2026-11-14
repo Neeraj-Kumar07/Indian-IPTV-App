@@ -109,7 +109,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_SAB_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/154
 https://onekey.virey40690.workers.dev/mpd/154
 #EXTINF:-1 tvg-id="474" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyPAL.png" group-title="Entertainment",Sony Pal
-https://vt-ip.vodep39240327.workers.dev/1824.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/474
+https://onekey.virey40690.workers.dev/mpd/474
 #EXTINF:-1 tvg-id="1393" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyWAH.png" group-title="Entertainment",Sony Wah
 https://vt-ip.vodep39240327.workers.dev/1826.m3u8
 #EXTINF:-1 tvg-name="Star Bharat Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/8704/1782288318704-h.jpg" group-title="Entertainment", Star Bharat Digital 
@@ -204,9 +206,7 @@ https://livetv.hotstar.com/mp2/gec-india-1540057030/0bbcb34798fd454a81c3502fb652
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_HD_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1136" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Utsav_Movies.png" group-title="Entertainment",Star Utsav Movies
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1136
-https://onekey.virey40690.workers.dev/mpd/1136
+https://vt-ip.vodep39240327.workers.dev/1771.m3u8
 #EXTINF:-1 group-title="Movies" tvg-id="3096" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Star_Gold_2_HD.png",STAR GOLD 2 HD
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -393,9 +393,7 @@ https://cdn.pishow.tv/ott/live/419/master.m3u8
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_Thrills_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="483" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyMAX2.png" group-title="Movies",Sony MAX2
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/483
-https://onekey.virey40690.workers.dev/mpd/483
+https://vt-ip.vodep39240327.workers.dev/464.m3u8
 #EXTINF:-1 tvg-id="488" tvg-chno="310" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0022K5ZV.png?lock=720x540" group-title="Movies",Zee Action
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/488
@@ -552,9 +550,12 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Super_Hungama_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="248" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/MTV.png" group-title="Music",MTV
 https://streaming.onnethn.com/MTV/playlist.m3u8
 #EXTINF:-1 tvg-id="1145" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/MTV_HD_Plus.png" group-title="Music",MTV HD
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1145
-https://onekey.virey40690.workers.dev/mpd/1145
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_MTVHD/JioHotstar/JS_MTVHD.m3u8
 #EXTINF:-1 tvg-id="585" tvg-chno="451" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0025L26R.png?lock=720x540" group-title="Music",Zing
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=648632d8a99d59ef86fd651405ffb587:027c47023b8eb258db20ac6ae7ba46a8
@@ -595,12 +596,12 @@ https://jcevents.hotstar.com/bpk-tv/082c75fa2fec61647e9192140d488d30/JioHotstar/
 #EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
 https://jcevents.hotstar.com/bpk-tv/3e2fc1dd48093e6be356a1120c941e84/JioHotstar/3e2fc1dd48093e6be356a1120c941e84.m3u8?|cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84&referer=https://www.hotstar.com/&origin=https://www.hotstar.com&user-agent=GmaxHub
 #EXTINF:-1 tvg-id="1984" tvg-logo="https://img.media.jio.com/tvpimages/56/36/301229_1742214332015_l_medium.jpg" group-title="Sports",Star Sports 2 Hindi
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1794682260~exp=1794703860~acl=/bpk-tv/StarSports2Hin_BTS/WDVLive/*~hmac=af096b1feb942e41091e45240ca22e5750b6bfaafe450bc0d7083da88c3a93e0
-#EXTHTTP:{"Cookie":"__hdnea__=st=1794682260~exp=1794703860~acl=/bpk-tv/StarSports2Hin_BTS/WDVLive/*~hmac=af096b1feb942e41091e45240ca22e5750b6bfaafe450bc0d7083da88c3a93e0","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvpllive.cdn.jio.com/bpk-tv/StarSports2Hin_BTS/WDVLive/index.mpd
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/3e2fc1dd48093e6be356a1120c941e84/JioHotstar/3e2fc1dd48093e6be356a1120c941e84.m3u8
 #EXTINF:-1 tvg-id="1985" tvg-name="STAR SPORTS 2 Hindi " tvg-logo="https://i.ibb.co/B5Mnd89k/SS2-HINDI.jpg" group-title="Sports", STAR SPORTS 2 Hindi 
 #EXTVLCOPT:http-user-agent=GmaxHub
 #EXTVLCOPT:http-referrer=https://www.hotstar.com/
@@ -744,13 +745,12 @@ https://live-dangal.akamaized.net/liveabr/playlist.m3u8
 #EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
 https://jcevents.hotstar.com/bpk-tv/JS_ColorsRishtey/JioHotstar/JS_ColorsRishtey.m3u8?|cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84&referer=https://www.hotstar.com/&origin=https://www.hotstar.com&user-agent=GmaxHub
 #EXTINF:-1 tvg-id="279" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ColorsRishtey.png" group-title="Entertainment",Colors Rishtey
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=baf92e22e64d5de39d46ddb024cb589b:b19a35807713524b7698bf55cc47dee6
-#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/824.1 ExoPlayerLib/824.0
-#EXTHTTP:{"Origin": "https://www.jiotv.com/", "Referer": "https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/ColorsRishtey_MOB/WDVLive/index.mpd
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_ColorsRishtey/JioHotstar/JS_ColorsRishtey.m3u8
 #EXTINF:-1 tvg-id="1143" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Utsav.png" group-title="Entertainment",Star Utsav
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -881,9 +881,7 @@ https://aasthaott.akamaized.net/110923/smil:aasthatamil.smil/playlist.m3u8
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/288
 https://onekey.virey40690.workers.dev/mpd/288
 #EXTINF:-1 tvg-id="594" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aastha_Bhajan.png" group-title="Devotional",Aastha Bhajan
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/594
-https://onekey.virey40690.workers.dev/mpd/594
+https://vt-ip.vodep39240327.workers.dev/526.m3u8
 #EXTINF:-1 tvg-id="593" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sadhna.png" group-title="Devotional",Sadhna
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b84437e9f0e756d9b7f43bc85740127d:b6540321bb80bb7790f69ca25a469d41
@@ -929,7 +927,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Jinvani_TV_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/601
 https://onekey.virey40690.workers.dev/mpd/601
 #EXTINF:-1 tvg-id="602" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Paras_tv.png" group-title="Devotional",Paras tv
-https://vt-ip.vodep39240327.workers.dev/1789.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/602
+https://onekey.virey40690.workers.dev/mpd/602
 #EXTINF:-1 tvg-id="608" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Shubhsandesh_TV.png" group-title="Devotional",Shubhsandesh TV
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=d2a0dbbb13ab511b9c6b8859df123191:c6c4ffa20d5046fc10a5b849d3c212cd
@@ -1135,9 +1135,12 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/NDTV_India_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/258
 https://onekey.virey40690.workers.dev/mpd/258
 #EXTINF:-1 tvg-id="1499" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News18_India_NW18.png" group-title="News",News18 India
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/231
-https://onekey.virey40690.workers.dev/mpd/231
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_News18India/JioHotstar/JS_News18India.m3u8?|cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84&referer=https://www.hotstar.com/&origin=https://www.hotstar.com&user-agent=GmaxHub
 #EXTINF:-1 tvg-id="1403" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Republic_Bharat.png" group-title="News",Republic Bharat
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b9b432747fc55b41963f4886558e547f:f796655ca877f1aab3ce27cfab1ac9de
@@ -1166,11 +1169,16 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/TV9_Bharatvarsh_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="499" tvg-chno="660" tvg-logo="https://dtil.tmsimg.com/assets/s143596_ld_h15_aa.png?lock=720x540" group-title="News",News Nation
 https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/6cd2f649739a45ca9de1daf81cc7d0f2/index.m3u8
 #EXTINF:-1 tvg-id="501" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News_24.png" group-title="News",News 24
-https://vt-ip.vodep39240327.workers.dev/484.m3u8
-#EXTINF:-1 tvg-id="1496" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/CNBC_Awaaz_NW18.png" group-title="News",CNBC Awaaz.
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/190
-https://onekey.virey40690.workers.dev/mpd/190
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/501
+https://onekey.virey40690.workers.dev/mpd/501
+#EXTINF:-1 tvg-id="1496" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/CNBC_Awaaz_NW18.png" group-title="News",CNBC Awaaz.
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_CNBCAwaaz/JioHotstar/JS_CNBCAwaaz.m3u8
 #EXTINF:-1 tvg-id="657" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Business.png" group-title="Business News",Zee Business  
 https://dwby15d04agvq.cloudfront.net/index_5.m3u8
 #EXTINF:-1 tvg-id="203" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_News.png" group-title="News",DD News
@@ -1412,17 +1420,26 @@ https://vidaa.kableone.com/hls/live/2111218/YrfMusic/master.m3u8
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Desi_Music_Station_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1505" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News18_Rajasthan_NW18.png" group-title="News",News18 Rajasthan.
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/531
-https://onekey.virey40690.workers.dev/mpd/531
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_News18Rajasthan/JioHotstar/JS_News18Rajasthan.m3u8?|cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84&referer=https://www.hotstar.com/&origin=https://www.hotstar.com&user-agent=GmaxHub
 #EXTINF:-1 tvg-id="693" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News18BiharJK.png" group-title="Bhojpuri",news18 Bihar Jharkhand
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/693
-https://onekey.virey40690.workers.dev/mpd/693
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_News18BiharJharkhand/JioHotstar/JS_News18BiharJharkhand.m3u8?|cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84&referer=https://www.hotstar.com/&origin=https://www.hotstar.com&user-agent=GmaxHub
 #EXTINF:-1 tvg-id="1504" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/News18_Bihar_Jharkhand_NW18.png" group-title="News",News18 Bihar Jharkhand.
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1504
-https://onekey.virey40690.workers.dev/mpd/1504
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_News18BiharJharkhand/JioHotstar/JS_News18BiharJharkhand.m3u8
 #EXTINF:-1 tvg-id="572" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Living_Foodz.png" group-title="News",Zee UP UK
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=0000:0000
@@ -1541,13 +1558,12 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Plus_HD_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1368
 https://onekey.virey40690.workers.dev/mpd/1368
 #EXTINF:-1 tvg-id="144" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ColorsHD.png" group-title="Entertainment",Colors HD
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=5360e12d4bb2519a9148d1089a55908d:7e8f500cef51595f3d43acafab1a8fb4
-#EXTVLCOPT:http-user-agent=plaYtv/7.1.3 (Linux;Android 13) ygx/824.1 ExoPlayerLib/824.0
-#EXTHTTP:{"Origin": "https://www.jiotv.com/", "Referer": "https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/ColorsHD_MOB/WDVLive/index.mpd
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://jcevents.hotstar.com/bpk-tv/JS_ColorsHD/JioHotstar/JS_ColorsHD.m3u8
 #EXTINF:-1 tvg-id="167" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeTVHD.png" group-title="Entertainment",Zee TV HD
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=aef082faf24b4dee820b6c0f8d7bbe42:5de674ae2583259e721077d150766b32
@@ -1567,9 +1583,15 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Plus_HD_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1116" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Plus.png" group-title="Entertainment",Star Plus
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.stream_headers=User-Agent=Virat Kohli&Referer=https://www.hotstar.com/&Origin=https://www.hotstar.com
+#KODIPROP:inputstream.adaptive.license_key=17a6e6ef02f74d9bbce4640371d40000:7a89315d2ec84875901dce2d3044556c
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=ae3d3b12ab0f5dada0f2423d1cc7b403:4577d96a74683b0c261cc5c0e30af011,911d8e8e9c645409b044dca3f5f82b45:c1fc9a8b91e4311d80eb6966ecd8647b,86cc5f899821572d824d4e5ada5ca90a:ef1e6497c816dbc95f7b42d7215707cd,2b0868c6e92b5d3490f688f8e75d9ebc:a1ef94ae152a30669ff77231763fc4f5,1b47214ae74557c1aed1b3678c565f94:f82bfec351105993a52ccb73cad1dd0c
-https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Plus_BTS/WDVLive/index.mpd?__hdnea__=st=1794657321~exp=1794678921~acl=/bpk-tv/Star_Plus_BTS/WDVLive/*~hmac=eaec267609aede1c49c39231ffc3a098f2847a49906c1a707de66826ef3e1c76
+#EXTVLCOPT:http-user-agent=Virat Kohli
+#EXTVLCOPT:http-referrer=https://www.hotstar.com/
+#EXTVLCOPT:http-extra-headers=Origin: https://www.hotstar.com
+#EXTVLCOPT:http-cookie=hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84
+#EXTHTTP:{"Origin":"https://www.hotstar.com","Referer":"https://www.hotstar.com/","User-Agent":"Virat Kohli","Cookie":"hdntl=exp=1794738921~acl=%2f*~id=5759d40438e6bfdb7b41885d9913c125~data=hdntl~hmac=654f0436349441202dc41194728fb1c1a3a5e4a253d5c882b6eed335e4765d84"}
+https://livetv.hotstar.com/mp1/gec-india-1540057045/a73567ab8abd4680bc8206dd0c625cb0/index.mpd
 #EXTINF:-1 tvg-id="167" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeTVHD.png" group-title="Entertainment",Zee TV HD  
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/S2/key/167
