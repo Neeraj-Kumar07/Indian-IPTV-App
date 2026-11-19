@@ -113,18 +113,7 @@ https://onekey.virey40690.workers.dev/mpd/154
 #EXTINF:-1 tvg-id="474" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyPAL.png" group-title="Entertainment",Sony Pal
 https://vt-ip.vodep39240327.workers.dev/1824.m3u8
 #EXTINF:-1 tvg-id="1393" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyWAH.png" group-title="Entertainment",Sony Wah
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=336eb0b114415971a745af85368c8a7c:4dc9974ddfec2c6da275acd6d617661b
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila
-#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/SonyWAH_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/1826.m3u8
 #EXTINF:-1 tvg-name="Star Bharat Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/8704/1782288318704-h.jpg" group-title="Entertainment", Star Bharat Digital 
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -853,7 +842,18 @@ https://cdn.pishow.tv/ott/live/1459/master.m3u8
 #EXTINF:-1 tvg-id="1005" tvg-logo="https://upload.wikimedia.org/wikipedia/en/6/68/Goldmines.jpg" group-title="Movies",Goldmines  
 https://streams.tangotv.in/GOLDMINES/ORIGIN/index.m3u8
 #EXTINF:-1 tvg-id="1295" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/B4U_Kadak.png" group-title="Movies",B4U Kadak
-https://vt-ip.vodep39240327.workers.dev/2256.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=null:null
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
+A: Source A: Token nahi mila
+B: Source B: ID 154 ka cookie nahi mila
+#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
+A: Source A: Token nahi mila
+B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/b4u_kadak/HLSPartner/index.m3u8
 #EXTINF:-1 tvg-id="8001" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/b/b8/Goldmines_Bollywood.jpg" group-title="Movies",Goldmines Bollywood
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=0000:0000
@@ -933,7 +933,18 @@ A: Source A: Token nahi mila
 B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Sanskar_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="594" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aastha_Bhajan.png" group-title="Devotional",Aastha Bhajan
-https://vt-ip.vodep39240327.workers.dev/526.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=8f934dbf4a685ce89edd21ea480659ab:07770764558e7951c7c2396177acfc17
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
+A: Source A: Token nahi mila
+B: Source B: ID 154 ka cookie nahi mila
+#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
+A: Source A: Token nahi mila
+B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvmblive.cdn.jio.com/bpk-tv/Aastha_Bhajan_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="593" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sadhna.png" group-title="Devotional",Sadhna
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b84437e9f0e756d9b7f43bc85740127d:b6540321bb80bb7790f69ca25a469d41
@@ -1193,18 +1204,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/ABP_News_India_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="493" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/India_Today.png" group-title="English",India Today  
 https://feeds.intoday.in/hltapps/api/master.m3u8
 #EXTINF:-1 tvg-id="258" tvg-chno="659" tvg-logo="https://dtil.tmsimg.com/assets/s157588_ld_h15_aa.png?lock=720x540" group-title="News",NDTV India
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=ee104f22af7759e198e7d37539c41047:c1dbca553be670e76b01f23f06e72917
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila
-#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/NDTV_India_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/475.m3u8
 #EXTINF:-1 tvg-id="258" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/NDTV_India.png" group-title="News",NDTV India
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/258
@@ -1260,18 +1260,7 @@ https://onekey.virey40690.workers.dev/mpd/190
 #EXTINF:-1 tvg-id="657" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Business.png" group-title="Business News",Zee Business  
 https://dwby15d04agvq.cloudfront.net/index_5.m3u8
 #EXTINF:-1 tvg-id="203" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_News.png" group-title="News",DD News
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=a2ba53a892b45061a32eb2f6e0a0e301:d53ff9aa39871f6ef4a0cf0a4f1899f4
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila
-#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/DD_News_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/492.m3u8
 #EXTINF:-1 tvg-id="1431" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/BBC_Hindi.png" group-title="News",BBC News Hindi
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -1537,18 +1526,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/NewsState_Bihar_JH_MOB/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/NEWS_24_MPCG_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="202" tvg-chno="193" tvg-logo="https://dtil.tmsimg.com/assets/s158252_ld_h9_aa.png?lock=720x540" group-title="Entertainment",DD National
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=94de6872c91153af8ed28a60a9a68620:d02b1539ff994afc78f043bcd178ccc6
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila
-#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/DD_National_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/491.m3u8
 #EXTINF:-1 tvg-id="202" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/DD_National.png" group-title="Entertainment",DD National
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/202
