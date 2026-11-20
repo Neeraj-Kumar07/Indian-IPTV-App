@@ -142,7 +142,9 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_SAB_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="474" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyPAL.png" group-title="Entertainment",Sony Pal
 https://vt-ip.vodep39240327.workers.dev/1824.m3u8
 #EXTINF:-1 tvg-id="1393" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyWAH.png" group-title="Entertainment",Sony Wah
-https://vt-ip.vodep39240327.workers.dev/1826.m3u8
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1393
+https://onekey.virey40690.workers.dev/mpd/1393
 #EXTINF:-1 tvg-name="Star Bharat Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/8704/1782288318704-h.jpg" group-title="Entertainment", Star Bharat Digital 
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -789,8 +791,8 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_2_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1794993022~exp=1795014622~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=4b42c13523b47f5006e4ad2492c3c809859190a0c1e38d916da49bf201ae775c
-#EXTHTTP:{"Cookie":"__hdnea__=st=1794993022~exp=1795014622~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=4b42c13523b47f5006e4ad2492c3c809859190a0c1e38d916da49bf201ae775c","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+#EXTVLCOPT:http-cookie=__hdnea__=st=1795137335~exp=1795158935~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=097ac5ead441bfc6b720cdf8785ecd5feb292c6ee6a7141195ba160649aa48c4
+#EXTHTTP:{"Cookie":"__hdnea__=st=1795137335~exp=1795158935~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=097ac5ead441bfc6b720cdf8785ecd5feb292c6ee6a7141195ba160649aa48c4","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/StarSportsKhel_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-name="Star Sports 3 Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/2523/1783001062523-h.jpg" group-title="Sports", Star Sports 3 Digital 
 #KODIPROP:inputstream=inputstream.adaptive
@@ -994,18 +996,7 @@ A: Source A: Token nahi mila
 B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Sanskar_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="594" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aastha_Bhajan.png" group-title="Devotional",Aastha Bhajan
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=8f934dbf4a685ce89edd21ea480659ab:07770764558e7951c7c2396177acfc17
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila
-#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/Aastha_Bhajan_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/526.m3u8
 #EXTINF:-1 tvg-id="593" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sadhna.png" group-title="Devotional",Sadhna
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b84437e9f0e756d9b7f43bc85740127d:b6540321bb80bb7790f69ca25a469d41
@@ -1255,18 +1246,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Shri_Amarnath_Shrine_Board_MOB/WDVLive/in
 #EXTINF:-1 tvg-id="173" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aaj_Tak.png" group-title="News",Aaj Tak
 https://feeds.intoday.in/aajtak/api/master.m3u8
 #EXTINF:-1 tvg-id="173" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aaj_Tak.png" group-title="News",Aaj Tak
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=569a346e50755a89afda4b7e5f47832e:81941582803cabe21a8b080189089004
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila
-#EXTHTTP:{"Cookie":"Error: Dono sources fail ho gaye.
-A: Source A: Token nahi mila
-B: Source B: ID 154 ka cookie nahi mila","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvmblive.cdn.jio.com/bpk-tv/Aaj_Tak_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/469.m3u8
 #EXTINF:-1 tvg-id="177" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ABP_News_India.png" group-title="News",ABP News India
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=8b8532e659a15d4ebfdb9675267140dd:5543d80c89009902be168fcde8b561b2
@@ -1896,8 +1876,8 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_2_HD_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1795070820~exp=1795092420~acl=/bpk-tv/Star_Gold_2_BTS/WDVLive/*~hmac=be3ea6212ad1b3f79e1481a9df9f66f0ac1d517368908be6cc672bbf8f96e9cb
-#EXTHTTP:{"Cookie":"__hdnea__=st=1795070820~exp=1795092420~acl=/bpk-tv/Star_Gold_2_BTS/WDVLive/*~hmac=be3ea6212ad1b3f79e1481a9df9f66f0ac1d517368908be6cc672bbf8f96e9cb","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+#EXTVLCOPT:http-cookie=__hdnea__=st=1795137336~exp=1795158936~acl=/bpk-tv/Star_Gold_2_BTS/WDVLive/*~hmac=06ead947a94ecd51cd09895596efac01dc26b8fce97ef94e2a21bb07ba7dc7fd
+#EXTHTTP:{"Cookie":"__hdnea__=st=1795137336~exp=1795158936~acl=/bpk-tv/Star_Gold_2_BTS/WDVLive/*~hmac=06ead947a94ecd51cd09895596efac01dc26b8fce97ef94e2a21bb07ba7dc7fd","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Gold_2_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="484" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeCinema.png" group-title="Movies",Zee Cinema
 #KODIPROP:inputstream=inputstream.adaptive
