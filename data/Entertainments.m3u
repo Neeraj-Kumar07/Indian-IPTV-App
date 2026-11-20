@@ -253,7 +253,12 @@ https://vt-ip.vodep39240327.workers.dev/1771.m3u8
 #EXTVLCOPT:http-user-agent=Droovy
 https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Gold_2_HD_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1154" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Gold_2.png" group-title="Movies",Star Gold 2
-https://vt-ip.vodep39240327.workers.dev/455.m3u8
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#EXTVLCOPT:http-user-agent=GmaxHub
+#EXTVLCOPT:http-cookie=__hdnea__=st=1795192837~exp=1795214437~acl=/bpk-tv/Star_Gold_2_BTS/WDVLive/*~hmac=af57ca0607f328ea0b94103f7e599d5ad444afe1eb67fcbdcd8424d663c58944
+#EXTHTTP:{"Cookie":"__hdnea__=st=1795192837~exp=1795214437~acl=/bpk-tv/Star_Gold_2_BTS/WDVLive/*~hmac=af57ca0607f328ea0b94103f7e599d5ad444afe1eb67fcbdcd8424d663c58944","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Gold_2_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1763" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ColorsCineplexBollywood.png" group-title="Movies",Colors Cineplex Bollywood
 #EXTVLCOPT:http-user-agent=GmaxHub
 #EXTVLCOPT:http-referrer=https://www.hotstar.com/
@@ -761,8 +766,8 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_2_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1795159516~exp=1795181116~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=af457f52b0deeea941d5d9df66a2d2a58a7fc5a2056f70be8012668d0f4f2caa
-#EXTHTTP:{"Cookie":"__hdnea__=st=1795159516~exp=1795181116~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=af457f52b0deeea941d5d9df66a2d2a58a7fc5a2056f70be8012668d0f4f2caa","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
+#EXTVLCOPT:http-cookie=__hdnea__=st=1795192835~exp=1795214435~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=51bbfcb30839b292e5d82d8ed29f12b5cb6ce927c2c4efdf0b650c8fab925d05
+#EXTHTTP:{"Cookie":"__hdnea__=st=1795192835~exp=1795214435~acl=/bpk-tv/StarSportsKhel_BTS/WDVLive/*~hmac=51bbfcb30839b292e5d82d8ed29f12b5cb6ce927c2c4efdf0b650c8fab925d05","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/StarSportsKhel_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-name="Star Sports 3 Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/2523/1783001062523-h.jpg" group-title="Sports", Star Sports 3 Digital 
 #KODIPROP:inputstream=inputstream.adaptive
@@ -1001,9 +1006,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Jinvani_TV_MOB/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/601
 https://onekey.virey40690.workers.dev/mpd/601
 #EXTINF:-1 tvg-id="602" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Paras_tv.png" group-title="Devotional",Paras tv
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/602
-https://onekey.virey40690.workers.dev/mpd/602
+https://vt-ip.vodep39240327.workers.dev/1789.m3u8
 #EXTINF:-1 tvg-id="608" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Shubhsandesh_TV.png" group-title="Devotional",Shubhsandesh TV
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=d2a0dbbb13ab511b9c6b8859df123191:c6c4ffa20d5046fc10a5b849d3c212cd
@@ -1187,9 +1190,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Shri_Amarnath_Shrine_Board_MOB/WDVLive/in
 #EXTINF:-1 tvg-id="173" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aaj_Tak.png" group-title="News",Aaj Tak
 https://feeds.intoday.in/aajtak/api/master.m3u8
 #EXTINF:-1 tvg-id="173" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aaj_Tak.png" group-title="News",Aaj Tak
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/173
-https://onekey.virey40690.workers.dev/mpd/173
+https://vt-ip.vodep39240327.workers.dev/469.m3u8
 #EXTINF:-1 tvg-id="177" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ABP_News_India.png" group-title="News",ABP News India
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=8b8532e659a15d4ebfdb9675267140dd:5543d80c89009902be168fcde8b561b2
