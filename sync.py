@@ -37,6 +37,7 @@ import requests
 SOURCES = [
 "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/Combined.m3u",
     "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/tstar.m3u",
+    "https://raw.githubusercontent.com/Neeraj-Kumar07/Indian-IPTV-App/refs/heads/master/data/temp.m3u",
     "https://raw.githubusercontent.com/sportlive18/sportlink-update/refs/heads/main/zio.m3u",
     "https://raw.githubusercontent.com/sportlive18/All-Playlist/refs/heads/main/Combined.m3u",
     "https://raw.githubusercontent.com/sportlive18/Sportlink-wtf/refs/heads/main/Sports.m3u",
