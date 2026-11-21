@@ -186,7 +186,11 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Gold_BTS/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_HD_MOB/WDVLive/index.mpd
 #EXTINF:-1 group-title="Movies" tvg-id="1136" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Utsav_Movies.png",Star Utsav Movies
-https://vt-ip.vodep39240327.workers.dev/1771.m3u8
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=5c4f38f647fa590f9904947fd5d1afb9:80c7058468bfea90d7ba55f550792ec3
+#EXTVLCOPT:http-user-agent=Virat
+https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Utsav_Movies_MOB/WDVLive/index.mpd
 #EXTINF:-1 group-title="Movies" tvg-id="3096" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Star_Gold_2_HD.png",STAR GOLD 2 HD
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -194,11 +198,7 @@ https://vt-ip.vodep39240327.workers.dev/1771.m3u8
 #KODIPROP:inputstream.adaptive.license_key=cb345026282e5b52bb2e85297573602f:ce5ceecc2a78c8cbc98e070d8874ebfa,ce54c367b6c25f67a26fd9098bcfa166:8cfae438d8900dc0f7495b6ab37c1748,1164cc414b7bd560c88f3b1c8491157b:a86c23474732a77623777fee0b741ddc,b4c551f60f3dec0892096430cda45f28:8af403dd32683fe1bcdd845a3f9f60af,260d6db45a8637807c69d9f2ab02e5a8:68257a32872e3944ab32068d17f6059c,69d36c78eb11569493ce7ac00d9d6e87:5121c719b63f0442e423db860b8c517f,cea1bcc4758d9423e3131f9c9f0dbc9e:1e759477000c42da913f7b03504af1fe
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_2_HD_MOB/WDVLive/index.mpd?__hdnea__=st=1795222809~exp=1795309209~acl=/*~hmac=fee85893e66ad6c48a22ce4f88bdb9537b9df75c8c8223d1772efd8036b64b4a
 #EXTINF:-1 tvg-id="1154" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Gold_2.png" group-title="Movies",Star Gold 2
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=https://sonyliv.yashnemade12250.workers.dev/key/1154
-#EXTVLCOPT:http-user-agent=TiviMate/5.1.0
-#EXTHTTP:{"cookie":"","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Gold_2_BTS/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/455.m3u8
 #EXTINF:-1 tvg-id="1763" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ColorsCineplexBollywood.png" group-title="Movies",Colors Cineplex Bollywood
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=hls
@@ -382,7 +382,7 @@ https://cdn.pishow.tv/ott/live/419/master.m3u8
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_Thrills_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="483" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyMAX2.png" group-title="Movies",Sony MAX2
-https://sliv.tgaadi.workers.dev/max2.m3u8
+https://vt-ip.vodep39240327.workers.dev/464.m3u8
 #EXTINF:-1 tvg-id="488" tvg-chno="310" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0022K5ZV.png?lock=720x540" group-title="Movies",Zee Action
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=hls
@@ -821,11 +821,7 @@ https://aasthaott.akamaized.net/110923/smil:aasthatamil.smil/playlist.m3u8
 #KODIPROP:inputstream.adaptive.license_key=null:null
 https://d2lk5u59tns74c.cloudfront.net/out/v1/bc57af15b4df4200af5fa4c1d6ab0a72/index.m3u8?
 #EXTINF:-1 tvg-id="594" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Aastha_Bhajan.png" group-title="Devotional",Aastha Bhajan
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=8f934dbf4a685ce89edd21ea480659ab:07770764558e7951c7c2396177acfc17
-#EXTVLCOPT:http-user-agent=Virat
-https://jiotvmblive.cdn.jio.com/bpk-tv/Aastha_Bhajan_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/526.m3u8
 #EXTINF:-1 tvg-id="593" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sadhna.png" group-title="Devotional",Sadhna
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b84437e9f0e756d9b7f43bc85740127d:b6540321bb80bb7790f69ca25a469d41
@@ -867,11 +863,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Darshan_24_MOB/WDVLive/index.mpd
 #EXTVLCOPT:http-user-agent=Virat
 https://jiotvmblive.cdn.jio.com/bpk-tv/Jinvani_TV_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="601" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Ishwar_TV.png" group-title="Devotional",Ishwar TV
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=6d627f6c9dd95abe9a76917cc22312b9:722439f5e1c03a30cbfe54c993801391
-#EXTVLCOPT:http-user-agent=plaYtv/7.1.5 (Linux;Android 15) ExoPlayerLib/2.11.6
-#EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
-https://jiotvmblive.cdn.jio.com/bpk-tv/Ishwar_TV_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/530.m3u8
 #EXTINF:-1 tvg-id="602" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Paras_tv.png" group-title="Devotional",Paras tv
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=d395f7decfe956f3b78a33f629b39a34:9a774e4d71fdbed14373e9a809504ccd
@@ -1574,12 +1566,9 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Plus_BTS/WDVLive/index.mpd
 #KODIPROP:inputstream.adaptive.license_key=56c440210aa94103acbbf668dd26e251:7d69aea40ea0f5ed6c14de4dee9a7168
 https://d1iwj24qiokrul.cloudfront.net/live/media/ZEE_TV_HD/dash/ZEE_TV_HD.mpd
 #EXTINF:-1 tvg-id="1351" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ZeeTV.png" group-title="Entertainment",Zee TV  
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1795237232~exp=1795258832~acl=/bpk-tv/ZeeTV_BTS/WDVLive/*~hmac=f18b690f4d17069502fddddea5092374670b16d41aa0bda662a4b5060733f2b2
-#EXTHTTP:{"Cookie":"__hdnea__=st=1795237232~exp=1795258832~acl=/bpk-tv/ZeeTV_BTS/WDVLive/*~hmac=f18b690f4d17069502fddddea5092374670b16d41aa0bda662a4b5060733f2b2","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeTV_BTS/WDVLive/index.mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1351
+https://onekey.virey40690.workers.dev/mpd/1351
 #EXTINF:-1 tvg-id="3096" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Gold_2_HD.png" group-title="Movies",Star Gold 2 HD
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=69d36c78eb11569493ce7ac00d9d6e87:5121c719b63f0442e423db860b8c517f
@@ -1610,12 +1599,9 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeCinema_BTS/WDVLive/index.mpd
 #EXTHTTP:{"cookie":"","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeZestHD_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1839" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/AndPictures.png" group-title="Movies",& Pictures
-#KODIPROP:inputstream=inputstream.adaptive
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTVLCOPT:http-cookie=__hdnea__=st=1795237232~exp=1795258832~acl=/bpk-tv/AndPictures_BTS/WDVLive/*~hmac=738edaec1fe62e74864ee41810eeed8765f39a06a272878bd296426ba5c13e41
-#EXTHTTP:{"Cookie":"__hdnea__=st=1795237232~exp=1795258832~acl=/bpk-tv/AndPictures_BTS/WDVLive/*~hmac=738edaec1fe62e74864ee41810eeed8765f39a06a272878bd296426ba5c13e41","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://jiotvpllive.cdn.jio.com/bpk-tv/AndPictures_BTS/WDVLive/index.mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=https://onekey.virey40690.workers.dev/key/1839
+https://onekey.virey40690.workers.dev/mpd/1839
 #EXTINF:-1 tvg-id="487" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ZeeBollywood.png" group-title="Movies",Zee Bollywood
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=https://sonyliv.yashnemade12250.workers.dev/key/487
@@ -1625,9 +1611,7 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeBollywood_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="488" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ZeeAction.png" group-title="Movies",Zee Action
 https://vt-ip.vodep39240327.workers.dev/450.m3u8
 #EXTINF:-1 tvg-id="1691" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ZeeClassicSD.png" group-title="Movies",Zee Classic
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=0824b17cbed7495580932f574bcf31ae:7b5434990c0179a782bdf62e2695c714
-https://d1iwj24qiokrul.cloudfront.net/live/media/Zee_Classic/dash/Zee_Classic.mpd
+https://vt-ip.vodep39240327.workers.dev/449.m3u8
 #EXTINF:-1 tvg-id="585" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeZing.png" group-title="Music",Zing
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=bbb2cec5234a4f0483d89f8747f42d88:cdda487a9b3d4588c33715f09b6bef35
