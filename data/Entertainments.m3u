@@ -89,7 +89,11 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeTV_BTS/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_HD_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1396" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_HD.png" group-title="Entertainment",SET HD
-https://sliv.tgaadi.workers.dev/sethd.m3u8
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=null:null
+#EXTVLCOPT:http-user-agent=Virat
+https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_HD_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="471" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonySAB.png" group-title="Entertainment",Sony SAB HD
 #EXTHTTP:{"Origin":"https://www.sonyliv.com","Referer":"https://www.sonyliv.com","User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"}
 https://sonychannel.neyini4157.workers.dev/channel/Sony SAB HD.m3u8
@@ -108,7 +112,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_SAB_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="474" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyPAL.png" group-title="Entertainment",Sony Pal
 https://sliv.tgaadi.workers.dev/sonypalsd.m3u8
 #EXTINF:-1 tvg-id="1393" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyWAH.png" group-title="Entertainment",Sony Wah
-https://sliv.tgaadi.workers.dev/sonywah.m3u8
+https://vt-ip.vodep39240327.workers.dev/1826.m3u8
 #EXTINF:-1 tvg-name="Star Bharat Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/8704/1782288318704-h.jpg" group-title="Entertainment", Star Bharat Digital 
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -390,7 +394,7 @@ https://cdn.pishow.tv/ott/live/419/master.m3u8
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_Thrills_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="483" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyMAX2.png" group-title="Movies",Sony MAX2
-https://sliv.tgaadi.workers.dev/max2.m3u8
+https://vt-ip.vodep39240327.workers.dev/464.m3u8
 #EXTINF:-1 tvg-id="488" tvg-chno="310" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0022K5ZV.png?lock=720x540" group-title="Movies",Zee Action
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=hls
@@ -1651,11 +1655,7 @@ https://d1iwj24qiokrul.cloudfront.net/live/media/Zee_Bollywood/dash/Zee_Bollywoo
 #KODIPROP:inputstream.adaptive.license_key=629011d7f4e2c23eb23ba4440f152f66:93845b978eccbed2e243ca2a4b2356d1,bc55d31397149ab27d5e0f766eb5a8fb:e79695a441165bb585c120ec2537ffe4,3b21fb42ab0541caadaeba4dfd552fea:a4f7cf30a24458a2581df068c62472dd,0625b853f3a9280908299a03799b89b2:d3beb3fbac9dac5dbecac470382905e2,3cd0a77e92f29da4f558d8ace30c6b77:8744d916a190216a35490932d403da02
 https://d1iwj24qiokrul.cloudfront.net/live/media/Zee_Action/dash/Zee_Action.mpd
 #EXTINF:-1 tvg-id="1691" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/ZeeClassicSD.png" group-title="Movies",Zee Classic
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=a4ca77c81bc556d994f7ecbee3bcbd20:dade64f6771f47a113f6cfdf67606cd0,a4ca77c81bc556d994f7ecbee3bcbd20:dade64f6771f47a113f6cfdf67606cd0
-#EXTVLCOPT:http-user-agent=Virat
-https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeClassicSD_BTS/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/449.m3u8
 #EXTINF:-1 tvg-id="585" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeZing.png" group-title="Music",Zing
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=bbb2cec5234a4f0483d89f8747f42d88:cdda487a9b3d4588c33715f09b6bef35
