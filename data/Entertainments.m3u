@@ -108,7 +108,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_SAB_MOB/WDVLive/index.mpd
 #EXTHTTP:{"cookie":"","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_SAB_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="474" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyPAL.png" group-title="Entertainment",Sony Pal
-https://vt-ip.vodep39240327.workers.dev/1824.m3u8
+https://sliv.tgaadi.workers.dev/sonypalsd.m3u8
 #EXTINF:-1 tvg-id="1393" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyWAH.png" group-title="Entertainment",Sony Wah
 https://vt-ip.vodep39240327.workers.dev/1826.m3u8
 #EXTINF:-1 tvg-name="Star Bharat Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/8704/1782288318704-h.jpg" group-title="Entertainment", Star Bharat Digital 
@@ -154,7 +154,11 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Food_Food_MOB/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/NDTV_Good_Times_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="2948" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/ZeeZestHD.png" group-title="Lifestyle",Zee Zest HD
-https://vt-ip.vodep39240327.workers.dev/2030.m3u8
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=a19c52e13a755afaa457a3c8488f4822:89dc06fb26e0fc72e9b9a1226073c8a2
+#EXTVLCOPT:http-user-agent=Virat
+https://jiotvpllive.cdn.jio.com/bpk-tv/ZeeZestHD_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-name="Star Gold Digital " tvg-logo="https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/6567/1784547656567-h.jpg" group-title="Movies", Star Gold Digital 
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
@@ -192,7 +196,11 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/Star_Gold_BTS/WDVLive/index.mpd
 #EXTHTTP:{"Cookie":"__hdnea__=st=1768956686~exp=1869043086~acl=/*~hmac="}
 https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Gold_HD_MOB/WDVLive/index.mpd
 #EXTINF:-1 group-title="Movies" tvg-id="1136" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Utsav_Movies.png",Star Utsav Movies
-https://vt-ip.vodep39240327.workers.dev/1771.m3u8
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=5c4f38f647fa590f9904947fd5d1afb9:80c7058468bfea90d7ba55f550792ec3
+#EXTVLCOPT:http-user-agent=Virat
+https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Utsav_Movies_MOB/WDVLive/index.mpd
 #EXTINF:-1 group-title="Movies" tvg-id="3096" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Star_Gold_2_HD.png",STAR GOLD 2 HD
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
@@ -722,11 +730,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/ColorsRishtey_MOB/WDVLive/index.mpd
 #EXTHTTP:{"cookie":"","Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
 https://jiotvpllive.cdn.jio.com/bpk-tv/ColorsRishtey_BTS/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="1143" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Star_Utsav.png" group-title="Entertainment",Star Utsav
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=7fbcce6b77855b8e9eaeebfc0a2ebc4f:1efb331b48f2993c74ec852475e7637f
-#EXTVLCOPT:http-user-agent=Virat
-https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Utsav_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/1770.m3u8
 #EXTINF:-1 tvg-id="473" tvg-chno="125" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG00260HWS.png?lock=720x540" group-title="Entertainment",Anmol TV
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
@@ -880,11 +884,7 @@ https://jiotvmblive.cdn.jio.com/bpk-tv/Darshan_24_MOB/WDVLive/index.mpd
 #EXTVLCOPT:http-user-agent=Virat
 https://jiotvmblive.cdn.jio.com/bpk-tv/Jinvani_TV_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="601" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Ishwar_TV.png" group-title="Devotional",Ishwar TV
-#KODIPROP:inputstream.adaptive.manifest_type=mpd
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=6d627f6c9dd95abe9a76917cc22312b9:722439f5e1c03a30cbfe54c993801391
-#EXTVLCOPT:http-user-agent=Virat
-https://jiotvmblive.cdn.jio.com/bpk-tv/Ishwar_TV_MOB/WDVLive/index.mpd
+https://vt-ip.vodep39240327.workers.dev/530.m3u8
 #EXTINF:-1 tvg-id="602" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/Paras_tv.png" group-title="Devotional",Paras tv
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
@@ -1745,13 +1745,11 @@ https://jiotvpllive.cdn.jio.com/bpk-tv/Ten_2_BTS/WDVLive/index.mpd
 #EXTVLCOPT:http-user-agent=Virat
 https://jiotvmblive.cdn.jio.com/bpk-tv/SonyLIV_Sports_1_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="3373" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyLIV_Sports_2.png" group-title="Sports",Sony LIV Sports 2
-#KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=ef24516ae38b50d18049343cd1cd998a:eb4810ec250a1795a0019dba7881ff45
-#EXTVLCOPT:http-user-agent=GmaxHub
-#EXTHTTP:{"Origin":"https://www.jiotv.com/","Referer":"https://www.jiotv.com/"}
-https://sliv.tgaadi.workers.dev/ten2hd.m3u8
+#EXTVLCOPT:http-user-agent=Virat
+https://jiotvmblive.cdn.jio.com/bpk-tv/SonyLIV_Sports_2_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-id="3374" tvg-logo="https://jiotv.catchup.cdn.jio.com/dare_images/images/SonyLIV_Sports_3.png" group-title="Sports",Sony LIV Sports 3
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
